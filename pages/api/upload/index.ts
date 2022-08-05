@@ -21,6 +21,7 @@ async function handler(
 				minititle,
 			},
 		});
+		console.log("apiupload", upload);
 	}
 
 	res.json({

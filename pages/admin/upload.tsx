@@ -32,6 +32,7 @@ const Upload = () => {
 	}: uploadTypes) => {
 		if (avatar && avatar.length > 0) {
 			const { uploadURL } = await (await fetch(`/api/upload/files`)).json();
+			console.log("uploadURL", uploadURL);
 			const form = new FormData();
 			form.append("file", avatar[0]);
 
@@ -52,6 +53,7 @@ const Upload = () => {
 	}, [file]);
 
 	useEffect(() => {
+		console.log("data", data);
 		if (data?.ok) {
 			setokdb("ok!!");
 		}
