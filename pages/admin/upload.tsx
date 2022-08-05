@@ -8,7 +8,7 @@ interface uploadTypes {
 	grade: number;
 	kind: string;
 	answer: number;
-	avatar: FileList;
+	fileList: FileList;
 	minititle?: string;
 }
 
@@ -27,14 +27,14 @@ const Upload = () => {
 		grade,
 		kind,
 		answer,
-		avatar,
+		fileList,
 		minititle,
 	}: uploadTypes) => {
-		if (avatar && avatar.length > 0) {
+		if (fileList && fileList.length > 0) {
 			const { uploadURL } = await (await fetch(`/api/upload/files`)).json();
 			console.log("uploadURL", uploadURL);
 			const form = new FormData();
-			form.append("file", avatar[0]);
+			form.append("file", fileList[0]);
 
 			if (uploadURL) {
 				const {
@@ -42,12 +42,12 @@ const Upload = () => {
 				} = await (
 					await fetch(uploadURL, { method: "POST", body: form })
 				).json();
-					console.log("client",grade, kind, answer, avatar: id, minititle )
+				console.log("client", grade, kind, answer, fileList, id, minititle);
 				uploadFn({ grade, kind, answer, avatar: id, minititle });
 			}
 		}
 	};
-	const file = watch("avatar");
+	const file = watch("fileList");
 	useEffect(() => {
 		if (file && file.length > 0) {
 			const filedata = file[0];
@@ -84,7 +84,7 @@ const Upload = () => {
 						)}
 
 						<input
-							{...register("avatar")}
+							{...register("fileList")}
 							accept="image/*"
 							className="hidden"
 							type="file"
