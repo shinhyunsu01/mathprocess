@@ -42,12 +42,12 @@ const Upload = () => {
 			uploadFn({ grade, kind, answer, avatar: id, minititle });
 		}
 	};
-	let avatar = watch("avatar");
+	let file = watch("avatar");
 	useEffect(() => {
-		if (avatar && avatar.length > 0) {
-			setPhotoPreview(URL.createObjectURL(avatar[0]));
+		if (file && file.length > 0) {
+			setPhotoPreview(URL.createObjectURL(file[0]));
 		}
-	}, [avatar]);
+	}, [file]);
 
 	useEffect(() => {
 		if (data?.ok) {
