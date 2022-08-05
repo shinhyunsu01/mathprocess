@@ -36,11 +36,15 @@ const Upload = () => {
 			const form = new FormData();
 			form.append("file", avatar[0]);
 
-			const {
-				result: { id },
-			} = await (await fetch(uploadURL, { method: "POST", body: form })).json();
+			if (uploadURL) {
+				const {
+					result: { id },
+				} = await (
+					await fetch(uploadURL, { method: "POST", body: form })
+				).json();
 
-			uploadFn({ grade, kind, answer, avatar: id, minititle });
+				uploadFn({ grade, kind, answer, avatar: id, minititle });
+			}
 		}
 	};
 	const file = watch("avatar");
