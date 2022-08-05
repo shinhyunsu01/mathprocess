@@ -42,7 +42,7 @@ const Upload = () => {
 				} = await (
 					await fetch(uploadURL, { method: "POST", body: form })
 				).json();
-
+					console.log("client",grade, kind, answer, avatar: id, minititle )
 				uploadFn({ grade, kind, answer, avatar: id, minititle });
 			}
 		}
