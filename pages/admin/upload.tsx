@@ -47,8 +47,7 @@ const Upload = () => {
 
 	useEffect(() => {
 		if (avatar && avatar.length > 0) {
-			const file = avatar[0];
-			setPhotoPreview(URL.createObjectURL(file));
+			setPhotoPreview(URL.createObjectURL(avatar[0]));
 		}
 	}, [avatar]);
 
