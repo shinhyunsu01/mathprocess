@@ -8,7 +8,7 @@ interface uploadTypes {
 	grade: number;
 	kind: string;
 	answer: number;
-	avatar: string;
+	avatar: FileList;
 	minititle?: string;
 }
 
@@ -46,6 +46,7 @@ const Upload = () => {
 	useEffect(() => {
 		if (file && file.length > 0) {
 			const filedata = file[0];
+			console.log(filedata);
 			setPhotoPreview(URL.createObjectURL(filedata));
 		}
 	}, [file]);
