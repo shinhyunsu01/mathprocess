@@ -5,7 +5,7 @@ export interface ResponseType {
 	[key: string]: any;
 }
 
-type method = "GET" | "POST" | "DELTE";
+type method = "GET" | "POST" | "DELETE";
 interface ConfigType {
 	methods: method[];
 
@@ -31,6 +31,7 @@ export default function withHandler({
 		try {
 			await handler(req, res);
 		} catch (error) {
+			console.log("aaaa");
 			return res.status(500).json({ error });
 		}
 	};
