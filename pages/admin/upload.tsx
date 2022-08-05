@@ -23,8 +23,6 @@ const Upload = () => {
 	const [photoPreview, setPhotoPreview] = useState("");
 	const [okdb, setokdb] = useState("");
 
-	const avatar = watch("avatar");
-
 	const onValid = async ({
 		grade,
 		kind,
@@ -44,7 +42,7 @@ const Upload = () => {
 			uploadFn({ grade, kind, answer, avatar: id, minititle });
 		}
 	};
-
+	let avatar = watch("avatar");
 	useEffect(() => {
 		if (avatar && avatar.length > 0) {
 			setPhotoPreview(URL.createObjectURL(avatar[0]));
