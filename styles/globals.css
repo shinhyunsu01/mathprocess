@@ -9,7 +9,7 @@
 	position: relative;
 	filter: url(#goo);
 }
-/*
+
 @media (min-width: 200px) {
 	.container {
 		margin: 0;
@@ -38,7 +38,7 @@
 		max-width: 1524px;
 	}
 }
-*/
+
 .particle {
 	width: 100px;
 	height: 100px;
