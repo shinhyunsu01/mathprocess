@@ -9,10 +9,14 @@
 	position: relative;
 	filter: url(#goo);
 }
-
+@media (min-width: 768px) {
+	.container {
+		max-width: 868px;
+	}
+}
 @media (min-width: 1024px) {
 	.container {
-		max-width: 1500px;
+		max-width: 1524px;
 	}
 }
 
