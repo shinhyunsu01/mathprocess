@@ -12,9 +12,11 @@
 /*
 @media (min-width: 200px) {
 	.container {
-		width: 300px;
+		margin: 0;
+		padding: 0;
 	}
-}*/
+}
+
 @media (min-width: 300px) {
 	.container {
 		margin: 0;
@@ -36,7 +38,7 @@
 		max-width: 1524px;
 	}
 }
-
+*/
 .particle {
 	width: 100px;
 	height: 100px;
