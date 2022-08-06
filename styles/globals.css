@@ -10,6 +10,12 @@
 	filter: url(#goo);
 }
 
+@media (min-width: 100px) {
+	.container {
+		max-width: 580px;
+	}
+}
+
 @media (min-width: 200px) {
 	.container {
 		max-width: 880px;
