@@ -26,7 +26,6 @@ const Enter = () => {
 	useEffect(() => {
 		if (data?.ok) {
 			if (data.user !== null) {
-				//페이진 이동
 				if (data.user.student === "student") {
 					router.push("/");
 				} else if (data.user.student === "teacher") {
