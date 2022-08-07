@@ -1,18 +1,38 @@
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+import { cls } from "../libs/client/utils";
+import useSWR from "swr";
+import useMutation from "../libs/client/useMutation";
 
 const Home: NextPage = () => {
+	const [select, setSelect] = useState(0);
+	const { data, error } = useSWR("/api/users");
+	const [totalQuestion, settotalQuestion] = useState([]);
+
+	const onClick = (e: any) => {
+		if (select === +e.target.value) {
+			setSelect(0);
+		} else setSelect(+e.target.value);
+	};
+
+	useEffect(() => {
+		if (data?.ok) {
+			settotalQuestion(data?.userInfo.nowscore.split(","));
+		}
+	}, [data]);
+
 	return (
 		<div className="w-full h-screen">
 			<div className="fixed w-full mt-2 h-10 flex items-center">
 				<div className="ml-20 font-bold text-lg">김민수 학생</div>
 				<div className="ml-2">서신고등학교 1학년</div>
-				<div className="px-6 py-2 mr-2  bg-sky-500 text-white rounded-full ml-auto text-center">
+				<div className="px-6 py-2 mr-2  bg-cyan-300 text-white rounded-full ml-auto text-center">
 					제출
 				</div>
 			</div>
 
 			<div className="absolute pt-20 flex flex-col w-14 h-screen bg-gray-500 items-center">
-				{[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((date, i) => (
+				{totalQuestion.map((date, i) => (
 					<div
 						key={i}
 						className="cursor-pointer rounded-md w-10 h-10 m-1 border-white border outline-none flex items-center justify-center relative"
@@ -42,9 +62,16 @@ const Home: NextPage = () => {
 					{[1, 2, 3, 4, 5].map((date, i) => (
 						<button
 							key={i}
-							className="focus:ring-2 m-5 rounded-full w-8 h-8 bg-black flex  items-center justify-center text-white"
+							value={i + 1}
+							onClick={onClick}
+							className={cls(
+								"m-5  w-9 h-9    rounded-lg flex  items-center justify-center  ",
+								select === i + 1
+									? "bg-slate-900 font-semibold text-white"
+									: "bg-white text-slate-700"
+							)}
 						>
-							<div>{i + 1}</div>
+							{i + 1}
 						</button>
 					))}
 				</div>

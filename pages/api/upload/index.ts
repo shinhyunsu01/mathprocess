@@ -7,19 +7,20 @@ async function handler(
 	res: NextApiResponse<ResponseType>
 ) {
 	const {
-		body: { grade, kind, answer, avatar, minititle },
+		body: { grade, kind, answer, avatar, minititle, difficulty },
 	} = req;
 	let upload;
 
 	if (req.method === "POST") {
 		console.log("api post", req.body);
-		upload = await client.question.create({
+		upload = await client.questionDB.create({
 			data: {
 				grade: Number(grade),
 				kind,
 				answer: Number(answer),
 				avatar,
 				minititle,
+				difficulty: Number(difficulty),
 			},
 		});
 		console.log("apiupload", upload);

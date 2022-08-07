@@ -10,6 +10,7 @@ interface uploadTypes {
 	answer: number;
 	fileList: FileList;
 	minititle?: string;
+	difficulty: number;
 }
 
 const Upload = () => {
@@ -29,6 +30,7 @@ const Upload = () => {
 		answer,
 		fileList,
 		minititle,
+		difficulty,
 	}: uploadTypes) => {
 		if (fileList && fileList.length > 0) {
 			const { uploadURL } = await (await fetch(`/api/upload/files`)).json();
@@ -42,8 +44,17 @@ const Upload = () => {
 				} = await (
 					await fetch(uploadURL, { method: "POST", body: form })
 				).json();
-				console.log("client", grade, kind, answer, fileList, id, minititle);
-				uploadFn({ grade, kind, answer, avatar: id, minititle });
+				console.log(
+					"client",
+					grade,
+					kind,
+					answer,
+					fileList,
+					id,
+					minititle,
+					difficulty
+				);
+				uploadFn({ grade, kind, answer, avatar: id, minititle, difficulty });
 			}
 		}
 	};
@@ -107,6 +118,22 @@ const Upload = () => {
 							placeholder="숫자 1,2,3 ex) 1"
 						></input>
 						{errors.grade?.message}
+
+						<div className="mt-2 text-sm font-medium text-slate-700  after:content-['*'] after:ml-0.5 after:text-red-500">
+							난이도
+						</div>
+						<input
+							{...register("difficulty", {
+								required: "난이도 입력 해주세요",
+							})}
+							type="text"
+							required
+							className="mt-1 w-full  px-3 py-2 bg-white border border-slate-300 rounded-md text-sm placeholder-slate-400 
+                        focus:outline-none foucs:border-sky-500 focus:
+                        "
+							placeholder="난이도 1~5"
+						></input>
+						{errors.difficulty?.message}
 
 						<div className="mt-2 text-sm font-medium text-slate-700  after:content-['*'] after:ml-0.5 after:text-red-500">
 							유형
