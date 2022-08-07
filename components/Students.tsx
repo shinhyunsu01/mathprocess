@@ -36,12 +36,9 @@ const Students = () => {
 					/>
 				</svg>
 				{data?.usersInfo?.map((e: any, i: number) => (
-					<Link href={`/admin/${e.id}`}>
+					<Link href={`/admin/${e.id}`} key={i}>
 						<a>
-							<div
-								key={i}
-								className="flex w-full items-center hover:bg-slate-300 rounded-lg cursor-pointer"
-							>
+							<div className="flex w-full items-center hover:bg-slate-300 rounded-lg cursor-pointer">
 								<div className="flex flex-col m-2 ">
 									<div className=" font-bold text-sm">{e.name}</div>
 									<div className=" font-normal text-sm text-slate-400">
