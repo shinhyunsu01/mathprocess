@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { cls } from "../libs/client/utils";
 import useSWR from "swr";
 import useMutation from "../libs/client/useMutation";
+import useUser from "../libs/client/useUser";
 
 const Home: NextPage = () => {
+	const { user, isLoading } = useUser("student");
 	const [select, setSelect] = useState(0);
 	const { data, error } = useSWR("/api/users");
 	const [totalQuestion, settotalQuestion] = useState([0]);

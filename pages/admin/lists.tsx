@@ -4,8 +4,10 @@ import useSWR from "swr";
 import OpenPicModal from "../../components/openPicModal";
 import Sidebar from "../../components/Sidebar";
 import Students from "../../components/Students";
+import useUser from "../../libs/client/useUser";
 
 const Lists = () => {
+	const { user, isLoading } = useUser("teacher");
 	const [grade, setGrade] = useState(1);
 	const onClick = (e: any) => {
 		setGrade(+e.target.id);
