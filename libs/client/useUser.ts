@@ -10,12 +10,16 @@ interface UserType {
 }
 
 export default function useUser(student: string) {
-	const { data, error } = useSWR<UserType>("api/users");
+	const { data, error } = useSWR<UserType>("/api/users");
 	const router = useRouter();
+
 	useEffect(() => {
-		if (data && !data.ok && data?.userInfo?.student !== student) {
+		console.log("yy", data?.userInfo?.student, student);
+		if (data && !data.ok) {
+			router.replace("/enter");
+		} else if (data && data.userInfo && data?.userInfo?.student !== student) {
 			router.replace("/enter");
 		}
-	}, [data, router]);
+	}, [data]);
 	return { user: data?.userInfo, isLoading: !data && !error };
 }

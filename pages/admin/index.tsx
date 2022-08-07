@@ -2,9 +2,11 @@ import React from "react";
 import Sidebar from "../../components/Sidebar";
 import Students from "../../components/Students";
 import dynamic from "next/dynamic";
+import useUser from "../../libs/client/useUser";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const Admin = () => {
+	const { user, isLoading } = useUser("teacher");
 	return (
 		<div className="flex w-full">
 			<Sidebar />

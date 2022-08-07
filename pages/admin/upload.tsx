@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import Sidebar from "../../components/Sidebar";
 import Students from "../../components/Students";
 import useMutation from "../../libs/client/useMutation";
+import useUser from "../../libs/client/useUser";
 
 interface uploadTypes {
 	grade: number;
@@ -14,6 +15,7 @@ interface uploadTypes {
 }
 
 const Upload = () => {
+	const { user, isLoading } = useUser("teacher");
 	const {
 		register,
 		watch,
