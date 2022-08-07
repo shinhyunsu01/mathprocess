@@ -83,8 +83,8 @@ const Lists = () => {
 							</tr>
 						</thead>
 
-						{data?.all.map((e: any) => (
-							<tbody className="cursor-pointer hover:bg-slate-200">
+						{data?.all.map((e: any, i: number) => (
+							<tbody key={i} className="cursor-pointer hover:bg-slate-200">
 								<tr>
 									<td className="">{e.kind}</td>
 									<td>{e.difficulty}</td>
