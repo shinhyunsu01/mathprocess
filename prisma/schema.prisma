@@ -17,9 +17,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  phone String? @unique
-  email String? @unique
-  name  String  @unique
+  phone  String? @unique
+  email  String? @unique
+  name   String  @unique
+  school String?
+  grade  Int?
 
   score String?
 
@@ -28,6 +30,8 @@ model User {
   student   String?
   payload   String
   Questions Questions[]
+
+  qnasubmit Boolean? @default(false)
 }
 
 model QuestionDB {

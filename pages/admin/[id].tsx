@@ -4,32 +4,21 @@ import Students from "../../components/Students";
 import dynamic from "next/dynamic";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const Admin = () => {
+const UserId = () => {
 	return (
 		<div className="flex w-full">
 			<Sidebar />
 			<Students />
-			<div>
+			<div className="">
 				<ApexChart
-					type="donut"
-					series={[44, 55, 41, 17]}
+					type="radialBar"
+					series={[44, 55, 67, 100]}
 					options={{
 						chart: {
-							height: "100%",
-							width: "100%",
+							height: 350,
 						},
-						responsive: [
-							{
-								options: {
-									chart: {
-										width: 200,
-									},
-									legend: {
-										position: "bottom",
-									},
-								},
-							},
-						],
+
+						labels: ["Apples", "Oranges", "Bananas", "Berries"],
 					}}
 				/>
 			</div>
@@ -37,4 +26,4 @@ const Admin = () => {
 	);
 };
 
-export default Admin;
+export default UserId;
