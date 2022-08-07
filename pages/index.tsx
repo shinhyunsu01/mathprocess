@@ -25,10 +25,10 @@ const Home: NextPage = () => {
 		<div className="w-full h-screen">
 			<div className="fixed w-full mt-2 h-10 flex items-center">
 				<div className="ml-20 font-bold text-lg">
-					{data?.userInfo.name} 학생
+					{data?.userInfo?.name} 학생
 				</div>
 				<div className="ml-2">
-					{data?.userInfo.school} {data?.userInfo.grade}학년
+					{data?.userInfo?.school} {data?.userInfo?.grade}학년
 				</div>
 				<div className="px-6 py-2 mr-2  bg-cyan-300 text-white rounded-full ml-auto text-center">
 					제출
