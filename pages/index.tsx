@@ -17,6 +17,7 @@ const Home: NextPage = () => {
 
 	useEffect(() => {
 		if (data?.ok) {
+			console.log("data", data);
 		}
 	}, [data]);
 
