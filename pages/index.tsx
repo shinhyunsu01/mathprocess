@@ -7,7 +7,7 @@ import useMutation from "../libs/client/useMutation";
 const Home: NextPage = () => {
 	const [select, setSelect] = useState(0);
 	const { data, error } = useSWR("/api/users");
-	const [totalQuestion, settotalQuestion] = useState([]);
+	const [totalQuestion, settotalQuestion] = useState([0]);
 
 	const onClick = (e: any) => {
 		if (select === +e.target.value) {

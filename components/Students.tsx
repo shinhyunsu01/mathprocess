@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { cls } from "../libs/client/utils";
-import AddStudentModal from "./addStudent";
+import AddStudentModal from "./addStudentModal";
 
 const Students = () => {
 	const { data, mutate } = useSWR("/api/users/all");
