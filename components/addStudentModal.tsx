@@ -34,7 +34,7 @@ const AddStudentModal = ({ handler, mutate }: addModalType) => {
 	};
 
 	return (
-		<div className="absolute w-full h-full flex items-center justify-center">
+		<div className="z-10 absolute w-full h-full flex items-center justify-center">
 			<form
 				onSubmit={handleSubmit(onValid)}
 				className="flex flex-col items-center justify-center rounded-2xl p-4 bg-slate-200"
