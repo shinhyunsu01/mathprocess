@@ -14,7 +14,6 @@ export default function useUser(student: string) {
 	const router = useRouter();
 
 	useEffect(() => {
-		console.log("yy", data?.userInfo?.student, student);
 		if (data && !data.ok) {
 			router.replace("/enter");
 		} else if (data && data.userInfo && data?.userInfo?.student !== student) {

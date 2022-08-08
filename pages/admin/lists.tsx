@@ -13,18 +13,20 @@ const Lists = () => {
 		setGrade(+e.target.id);
 	};
 	const [openpic, setopenpic] = useState("");
+	const closeHandler = () => {
+		setopenpic("");
+	};
 
 	const { data } = useSWR(`/api/question/all/${grade}`);
 	useEffect(() => {
 		console.log("openpic", openpic);
-		("");
 	}, [openpic]);
 	return (
 		<>
-			<div className="flex w-full">
+			<div className="flex w-full h-full">
 				<Sidebar />
 				<Students />
-				<div className="w-full m-4 flex flex-col">
+				<div className="w-full m-4 flex flex-col h-full">
 					<div className="flex justify-center">
 						<button
 							id="1"
@@ -77,9 +79,9 @@ const Lists = () => {
 							<span className="text-slate-500"> 개</span>
 						</button>
 					</div>
-					<div className="overflow-auto w-full h-full rounded-2xl bg-white shadow-lg  shadow-slate-400">
-						<table className="relative w-full text-center border-collapse gap-1">
-							<thead>
+					<div className="h-full w-full overflow-auto  rounded-2xl bg-white shadow-lg  shadow-slate-400">
+						<table className="relative w-full  text-center border-collapse gap-1">
+							<thead className="sticky top-0 z-10 bg-white">
 								<tr>
 									<th>유형</th>
 									<th>난이도</th>
@@ -92,7 +94,7 @@ const Lists = () => {
 							{data?.all.map((e: any, i: number) => (
 								<tbody
 									key={i}
-									className="cursor-pointer hover:bg-slate-200"
+									className=" overflow-y-auto cursor-pointer hover:bg-slate-200"
 									onClick={() => setopenpic(e.avatar)}
 								>
 									<tr>
@@ -101,7 +103,7 @@ const Lists = () => {
 										<td>{e.answer}</td>
 										<td>{e.minititle}</td>
 										<td>
-											<div className="w-full  h-14 relative">
+											<div className="w-full  h-20 relative">
 												<Image
 													layout="fill"
 													width={100}
@@ -117,7 +119,11 @@ const Lists = () => {
 					</div>
 				</div>
 			</div>
-			{openpic ? <OpenPicModal handler={setGrade} avatar={openpic} /> : ""}
+			{openpic !== "" ? (
+				<OpenPicModal handler={closeHandler} avatar={openpic} />
+			) : (
+				""
+			)}
 		</>
 	);
 };
