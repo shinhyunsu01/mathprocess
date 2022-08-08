@@ -8,10 +8,10 @@ interface openPicModalType {
 const OpenPicModal = ({ handler, avatar }: openPicModalType) => {
 	return (
 		<div className=" absolute top-0 w-full h-full flex items-center justify-center">
-			<div className="w-80 h-80  z-20 p-4 rounded-2xl bg-white shadow-lg shadow-slate-400  flex flex-col">
+			<div className="w-80 h-80  relative z-20 p-4 rounded-2xl bg-white shadow-lg shadow-slate-400  flex flex-col">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					className="h-6 w-6 ml-auto s cursor-pointer"
+					className="z-10 absolute h-6 w-6 ml-auto top-2 right-2 cursor-pointer"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"

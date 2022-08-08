@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "../../../../libs/server/withHandler";
 import client from "../../../../libs/server/client";
+import { Router } from "express";
 
 interface Obj {
 	[key: string]: any;
@@ -10,7 +11,9 @@ async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<ResponseType>
 ) {
-	const {} = req;
+	const {
+		body: { allquestion },
+	} = req;
 
 	let canQuestions: any = [];
 
@@ -77,6 +80,26 @@ async function handler(
 		res.json({
 			ok: true,
 			canQuestions,
+		});
+	}
+	if (req.method === "POST") {
+		//console.log("post", allquestion, allquestion.toString());
+		/*
+		await client.questions.create({
+			data: {
+				qnasubmit: false,
+				question: allquestion.toString(),
+
+				user: {
+					connect: {
+						id: Number(req.query.id),
+					},
+				},
+			},
+		});*/
+
+		res.json({
+			ok: true,
 		});
 	}
 }

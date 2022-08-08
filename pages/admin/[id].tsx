@@ -9,18 +9,32 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { cls } from "../../libs/client/utils";
 import OpenPicModal from "../../components/openPicModal";
+import ErrorModal from "../../components/ErrorModal";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const UserId = () => {
 	const { user, isLoading } = useUser("teacher");
 	const router = useRouter();
 	const { data } = useSWR(`/api/question/make/${router.query.id}`);
+	const [makeFn, { data: makedata }] = useMutation(
+		`/api/question/make/${router.query.id}`
+	);
 	const { data: selectUser } = useSWR(
 		`/api/users/selectuser/${router.query.id}`
 	);
 	const [selectQues, setselectQues] = useState<number[]>([]);
 	const [chartX, setchartX] = useState<string[]>([""]);
 	const [chartVal, setchartVal] = useState<number[]>([]);
+	const [errorModal, setErrorModal] = useState(false);
+	const [submittloading, setsutmitLoading] = useState(false);
+
+	const [openpic, setopenpic] = useState("");
+	const closeHandler = () => {
+		setopenpic("");
+	};
+	const closeErrHandler = () => {
+		setErrorModal(false);
+	};
 
 	const onClick = (e: any) => {
 		if (Object.values(selectQues).includes(e.id)) {
@@ -31,13 +45,7 @@ const UserId = () => {
 		}
 	};
 
-	const [openpic, setopenpic] = useState("");
-	const closeHandler = () => {
-		setopenpic("");
-	};
-
 	useEffect(() => {
-		console.log("selectUser", selectUser);
 		if (selectUser?.userInfo?.score) {
 			//console.log("11", selectUser?.userInfo?.score);
 			let score = selectUser?.userInfo?.score;
@@ -54,9 +62,29 @@ const UserId = () => {
 		}
 	}, [selectUser]);
 
+	const submitonClick = () => {
+		setsutmitLoading(true);
+		let mapsubmit = new Map();
+		for (let cnt = 0; cnt < selectQues.length; cnt++) {
+			data?.canQuestions.map((ee: any) => {
+				if (ee.id === selectQues[cnt]) {
+					if (mapsubmit.has(ee.kind)) {
+						setErrorModal(true);
+						return;
+					}
+					mapsubmit.set(ee.kind, 1);
+				}
+			});
+		}
+
+		makeFn({ allquestion: selectQues });
+	};
+
 	useEffect(() => {
-		console.log("chartX", chartX);
-	}, [chartX]);
+		if (makedata?.ok === true) {
+			setsutmitLoading(false);
+		}
+	}, [makedata]);
 
 	return (
 		<>
@@ -64,26 +92,51 @@ const UserId = () => {
 				<Sidebar />
 				<Students />
 				<div className="fixed top-3 right-5 flex">
-					<button className="text-bold hover:bg-white hover:text-black px-4 py-2 cursor-pointer rounded-2xl bg-black  shadow-lg shadow-slate-400  text-white">
-						시험 출제
-					</button>
+					<div
+						onClick={submitonClick}
+						className={cls(
+							`text-bold flex hover:bg-white hover:text-black px-4 py-2 cursor-pointer rounded-2xl bg-black  shadow-lg shadow-slate-400  text-white`
+						)}
+					>
+						{submittloading ? (
+							<svg
+								className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+							>
+								<circle
+									className="opacity-25"
+									cx="12"
+									cy="12"
+									r="10"
+									stroke="currentColor"
+									strokeWidth="4"
+								></circle>
+								<path
+									className="opacity-75"
+									fill="currentColor"
+									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+								></path>
+							</svg>
+						) : (
+							""
+						)}
+						<div>{makedata?.ok ? "Processsing" : "시험 출제"}</div>
+					</div>
 				</div>
-				<div className="flex flex-col w-full mt-16 mr-10">
-					<div className="flex w-full items-center mb-10">
-						<div className="w-full">
+				<div className="flex flex-col w-full h-full mt-16 mr-10 ">
+					<div className=" flex w-full items-center mb-10 border-b-2">
+						<div className=" w-1/2">
 							<ApexChart
 								type="radialBar"
 								series={chartVal}
 								options={{
-									chart: {
-										height: 350,
-									},
-
 									labels: chartX,
 								}}
 							/>
 						</div>
-						<div className="grid grid-cols-2 gap-2 w-full">
+						<div className="grid grid-cols-5 gap-2 w-full">
 							{[1, 2, 3, 4, 5, 67, 8, 9, 10].map((_, i) => (
 								<div
 									key={i}
@@ -99,7 +152,7 @@ const UserId = () => {
 						</div>
 					</div>
 
-					<table className="relative w-full text-center border-collapse gap-1">
+					<table className=" w-full mt-auto text-center border-collapse gap-1">
 						<thead className="sticky top-0 z-10 bg-white">
 							<tr>
 								<th></th>
@@ -154,6 +207,14 @@ const UserId = () => {
 			</div>
 			{openpic !== "" ? (
 				<OpenPicModal handler={closeHandler} avatar={openpic} />
+			) : (
+				""
+			)}
+			{errorModal ? (
+				<ErrorModal
+					handler={closeErrHandler}
+					message="중복된 유형이 있습니다"
+				/>
 			) : (
 				""
 			)}

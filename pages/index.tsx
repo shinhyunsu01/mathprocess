@@ -6,22 +6,23 @@ import useMutation from "../libs/client/useMutation";
 import useUser from "../libs/client/useUser";
 
 const Home: NextPage = () => {
-	const { user, isLoading } = useUser("student");
 	const [select, setSelect] = useState(0);
 	const { data, error } = useSWR("/api/users");
 	const [totalQuestion, settotalQuestion] = useState([0]);
+	const { user, isLoading } = useUser("student");
+	//	const { data: mequestion } = useSWR("/api/users/mequestion");
 
 	const onClick = (e: any) => {
 		if (select === +e.target.value) {
 			setSelect(0);
 		} else setSelect(+e.target.value);
 	};
-
+	/*
 	useEffect(() => {
-		if (data?.ok) {
-			console.log("data", data);
+		if (mequestion?.ok) {
+			console.log("mequestion", mequestion);
 		}
-	}, [data]);
+	}, [mequestion]);*/
 
 	return (
 		<div className="w-full h-screen">
