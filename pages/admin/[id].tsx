@@ -15,46 +15,20 @@ const UserId = () => {
 	const { user, isLoading } = useUser("teacher");
 	const router = useRouter();
 	const { data } = useSWR(`/api/question/make/${router.query.id}`);
-
-	/*const [selectQues, setselectQues] = useState([
-		{
-			id: 0,
-			check: false,
-		},
-	]);*/
-
+	const { data: selectUser } = useSWR(
+		`/api/users/selectuser/${router.query.id}`
+	);
 	const [selectQues, setselectQues] = useState<number[]>([]);
+	const [chartX, setchartX] = useState<string[]>([""]);
+	const [chartVal, setchartVal] = useState<number[]>([]);
 
 	const onClick = (e: any) => {
 		if (Object.values(selectQues).includes(e.id)) {
 			const filters = selectQues.filter((ee) => Number(ee) !== e.id);
 			setselectQues(filters);
 		} else {
-			//console.log("bb");
 			setselectQues((prev) => [...prev, e.id]);
 		}
-
-		/*click = false;
-		selectQues.map((ee: any, i: any) => {
-			if (e.id === ee.id) {
-				let back = selectQues;
-				back[i].check = !back[i].check;
-				console.log("after", back);
-				setselectQues(back);
-				click = true;
-				return;
-			}
-		});
-
-		if (!click) {
-			setselectQues((prev) => [
-				...prev,
-				{
-					id: e.id,
-					check: false,
-				},
-			]);
-		}*/
 	};
 
 	const [openpic, setopenpic] = useState("");
@@ -63,8 +37,26 @@ const UserId = () => {
 	};
 
 	useEffect(() => {
-		console.log("selectQues", selectQues);
-	}, [selectQues]);
+		console.log("selectUser", selectUser);
+		if (selectUser?.userInfo?.score) {
+			//console.log("11", selectUser?.userInfo?.score);
+			let score = selectUser?.userInfo?.score;
+			let xData = [""];
+			let val = [0];
+			score?.split(",").map((e: any, i: number) => {
+				let data = e.split("_");
+				xData[i] = data[0];
+				val[i] = (data[1] / 5) * 100;
+			});
+
+			setchartVal(val);
+			setchartX(xData);
+		}
+	}, [selectUser]);
+
+	useEffect(() => {
+		console.log("chartX", chartX);
+	}, [chartX]);
 
 	return (
 		<>
@@ -76,18 +68,36 @@ const UserId = () => {
 						시험 출제
 					</button>
 				</div>
-				<div className="flex flex-col">
-					<ApexChart
-						type="radialBar"
-						series={[44, 55, 67, 100]}
-						options={{
-							chart: {
-								height: 350,
-							},
+				<div className="flex flex-col w-full mt-16 mr-10">
+					<div className="flex w-full items-center mb-10">
+						<div className="w-full">
+							<ApexChart
+								type="radialBar"
+								series={chartVal}
+								options={{
+									chart: {
+										height: 350,
+									},
 
-							labels: ["Apples", "Oranges", "Bananas", "Berries"],
-						}}
-					/>
+									labels: chartX,
+								}}
+							/>
+						</div>
+						<div className="grid grid-cols-2 gap-2 w-full">
+							{[1, 2, 3, 4, 5, 67, 8, 9, 10].map((_, i) => (
+								<div
+									key={i}
+									className="flex flex-col bg-black p-4 rounded-2xl text-white"
+								>
+									<div>미분</div>
+									<div>
+										<span>1</span>
+										<span>/10</span>
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
 
 					<table className="relative w-full text-center border-collapse gap-1">
 						<thead className="sticky top-0 z-10 bg-white">

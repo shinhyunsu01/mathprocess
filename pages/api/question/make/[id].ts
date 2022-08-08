@@ -40,7 +40,6 @@ async function handler(
 
 		//내 점수 obj
 		if (user?.score === null) {
-			console.log("ee");
 			let str = "";
 			Object.keys(group).map((e) => {
 				str += `${e}_3,`;
@@ -74,7 +73,7 @@ async function handler(
 				}
 			});
 		});
-		console.log("api canQuestions", canQuestions);
+
 		res.json({
 			ok: true,
 			canQuestions,
