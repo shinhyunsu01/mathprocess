@@ -163,7 +163,7 @@ const UserId = () => {
 							</tr>
 						</thead>
 						{data?.canQuestions?.map((ee: any, i: number) => (
-							<tbody className="h-14  hover:bg-slate-200">
+							<tbody key={i} className="h-14  hover:bg-slate-200">
 								<tr>
 									<td className="cursor-pointer">
 										<svg
