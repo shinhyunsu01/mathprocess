@@ -59,7 +59,6 @@ const UserId = () => {
 	useEffect(() => {
 		console.log("selectUser", selectUser);
 		if (selectUser?.userInfo?.score) {
-			console.log("ook");
 			let score = selectUser?.userInfo?.score;
 			let xData = [""];
 			let val = [0];
@@ -69,6 +68,7 @@ const UserId = () => {
 				val[i] = (data[1] / 5) * 100;
 			});
 
+			console.log("ook", val, xData);
 			setchartVal(val);
 			setchartX(xData);
 		}
