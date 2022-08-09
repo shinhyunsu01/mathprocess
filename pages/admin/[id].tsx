@@ -96,6 +96,10 @@ const UserId = () => {
 		}
 	}, [makedata]);
 
+	useEffect(() => {
+		console.log("data", data);
+	}, [data]);
+
 	return (
 		<>
 			<div className="flex w-full">
