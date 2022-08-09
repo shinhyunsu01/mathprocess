@@ -4,6 +4,7 @@ import { cls } from "../libs/client/utils";
 import useSWR from "swr";
 import useMutation from "../libs/client/useMutation";
 import useUser from "../libs/client/useUser";
+import Image from "next/image";
 
 const Home: NextPage = () => {
 	const [select, setSelect] = useState(0);
@@ -61,10 +62,18 @@ const Home: NextPage = () => {
 					</div>
 				))}
 			</div>
-
 			<div className="w-full h-full flex flex-col items-center justify-center">
 				<div className="h-16 w-5/6">1. 미분 적분</div>
-				<div className="bg-black w-1/2 h-1/2" />
+				<div className="bg-black rounded-2xl w-1/2 h-1/2 relative object-none">
+					<Image
+						layout="fill"
+						objectFit="contain"
+						width={100}
+						height={100}
+						src={`https://imagedelivery.net/fhkogDoSTeLvyDALpsIbnw/2a5cfaa2-ab4b-4636-b066-b8175d23a700/public`}
+					/>
+				</div>
+
 				<div className="mt-5 flex ">
 					{[1, 2, 3, 4, 5].map((date, i) => (
 						<button

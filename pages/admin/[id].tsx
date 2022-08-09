@@ -16,6 +16,7 @@ const UserId = () => {
 	const { user, isLoading } = useUser("teacher");
 	const router = useRouter();
 	const { data } = useSWR(`/api/question/make/${router.query.id}`);
+	console.log("why", router.query.id);
 	const [makeFn, { data: makedata }] = useMutation(
 		`/api/question/make/${router.query.id}`
 	);
