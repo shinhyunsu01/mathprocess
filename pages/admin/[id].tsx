@@ -15,13 +15,20 @@ const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 const UserId = () => {
 	const { user, isLoading } = useUser("teacher");
 	const router = useRouter();
-	const { data } = useSWR(`/api/question/make/${router.query.id}`);
-	console.log("why", router.query.id);
+
+	const { data } = useSWR(
+		typeof window === "undefined"
+			? null
+			: `/api/question/make/${router.query.id}`
+	);
+
 	const [makeFn, { data: makedata }] = useMutation(
 		`/api/question/make/${router.query.id}`
 	);
 	const { data: selectUser } = useSWR(
-		`/api/users/selectuser/${router.query.id}`
+		typeof window === "undefined"
+			? null
+			: `/api/users/selectuser/${router.query.id}`
 	);
 	const [selectQues, setselectQues] = useState<number[]>([]);
 	const [chartX, setchartX] = useState<string[]>([""]);
@@ -48,7 +55,6 @@ const UserId = () => {
 
 	useEffect(() => {
 		if (selectUser?.userInfo?.score) {
-			//console.log("11", selectUser?.userInfo?.score);
 			let score = selectUser?.userInfo?.score;
 			let xData = [""];
 			let val = [0];
