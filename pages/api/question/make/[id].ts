@@ -42,7 +42,7 @@ async function handler(
 		});
 
 		//내 점수 obj
-		if (user?.score === null) {
+		if (user?.score === null || user?.score === "") {
 			let str = "";
 			Object.keys(group).map((e) => {
 				str += `${e}_3,`;
