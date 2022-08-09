@@ -16,17 +16,17 @@ const UserId = () => {
 	const { user, isLoading } = useUser("teacher");
 	let router = useRouter();
 
-	const pageId = router.query.id !== undefined ? router.query.id : "";
+	//const pageId = router.query.id !== undefined ? router.query.id : "";
 
 	const { data } = useSWR(
-		router.query.id ? `/api/question/make/${pageId}` : null
+		router.query.id ? `/api/question/make/${router.query.id}` : null
 	);
 
 	const [makeFn, { data: makedata }] = useMutation(
-		`/api/question/make/${pageId}`
+		`/api/question/make/${router.query.id}`
 	);
 	const { data: selectUser } = useSWR(
-		router.query.id ? `/api/users/selectuser/${pageId}` : null
+		router.query.id ? `/api/users/selectuser/${router.query.id}` : null
 	);
 	const [selectQues, setselectQues] = useState<number[]>([]);
 	const [chartX, setchartX] = useState<string[]>([""]);
