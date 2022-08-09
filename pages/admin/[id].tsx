@@ -57,7 +57,9 @@ const UserId = () => {
 	};
 
 	useEffect(() => {
+		console.log("selectUser", selectUser);
 		if (selectUser?.userInfo?.score) {
+			console.log("ook");
 			let score = selectUser?.userInfo?.score;
 			let xData = [""];
 			let val = [0];
