@@ -14,19 +14,19 @@ const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const UserId = () => {
 	const { user, isLoading } = useUser("teacher");
-	const router = useRouter();
+	let router = useRouter();
 
 	const pageId = router.query.id !== undefined ? router.query.id : "";
 
 	const { data } = useSWR(
-		typeof window === "undefined" ? null : `/api/question/make/${pageId}`
+		router.query.id ? `/api/question/make/${pageId}` : null
 	);
 
 	const [makeFn, { data: makedata }] = useMutation(
 		`/api/question/make/${pageId}`
 	);
 	const { data: selectUser } = useSWR(
-		typeof window === "undefined" ? null : `/api/users/selectuser/${pageId}`
+		router.query.id ? `/api/users/selectuser/${pageId}` : null
 	);
 	const [selectQues, setselectQues] = useState<number[]>([]);
 	const [chartX, setchartX] = useState<string[]>([""]);
