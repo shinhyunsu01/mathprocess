@@ -213,6 +213,7 @@ const UserId = () => {
 											<Image
 												onClick={() => setopenpic(ee?.avatar)}
 												layout="fill"
+												objectFit="contain"
 												width={100}
 												height={100}
 												src={`https://imagedelivery.net/fhkogDoSTeLvyDALpsIbnw/${ee?.avatar}/public`}
