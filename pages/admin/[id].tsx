@@ -12,13 +12,18 @@ import OpenPicModal from "../../components/openPicModal";
 import ErrorModal from "../../components/ErrorModal";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
+interface MakeType {
+	ok: boolean;
+	canQuestions: any;
+}
+
 const UserId = () => {
 	const { user, isLoading } = useUser("teacher");
 	let router = useRouter();
 
 	//const pageId = router.query.id !== undefined ? router.query.id : "";
 
-	const { data } = useSWR(
+	const { data } = useSWR<MakeType>(
 		router.query.id ? `/api/question/make/${router.query.id}` : null
 	);
 
