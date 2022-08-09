@@ -64,7 +64,7 @@ const UserId = () => {
 			let val = [0];
 			score?.split(",").map((e: any, i: number) => {
 				let data = e.split("_");
-				xData[i] = data[0];
+				(xData[i] = data[0]), "";
 				val[i] = (data[1] / 5) * 100;
 			});
 
@@ -143,10 +143,16 @@ const UserId = () => {
 					<div className=" flex w-full items-center mb-10 border-b-2">
 						<div className=" w-1/2">
 							<ApexChart
-								type="radialBar"
-								series={chartVal}
+								type="bar"
+								series={[
+									{
+										data: chartVal,
+									},
+								]}
 								options={{
-									labels: chartX,
+									xaxis: {
+										categories: chartX,
+									},
 								}}
 							/>
 						</div>
