@@ -6,22 +6,28 @@ import { cls } from "../libs/client/utils";
 
 interface AloneQuestionType {
 	questionId: number;
-	btnonClick: (e: any) => void;
+	btnonClick: any;
 	statebtn: any;
+	disabled: boolean;
 }
 
 const AloneQuestion = ({
 	questionId,
 	btnonClick,
 	statebtn,
+	disabled,
 }: AloneQuestionType) => {
 	const { data } = useSWR(`/api/question/${questionId}`);
 
 	const onClick = (e: any) => {
 		btnonClick(e);
 	};
+
+	useEffect(() => {
+		console.log("111data", data, questionId);
+	}, [data]);
 	return (
-		<div className="w-full h-full flex flex-col items-center justify-center">
+		<div className="w-full h-full  flex flex-col items-center justify-center">
 			<div className="flex">
 				<div className="font-bold text-4xl">{statebtn?.index + 1} </div>
 				<div className="mt-auto">번 문제 </div>
@@ -42,6 +48,7 @@ const AloneQuestion = ({
 					<button
 						key={i}
 						value={i + 1}
+						disabled={disabled}
 						onClick={onClick}
 						className={cls(
 							"m-5  w-9 h-9    rounded-lg flex  items-center justify-center  ",

@@ -16,7 +16,8 @@ interface totalQuestionType {
 
 const Home: NextPage = () => {
 	const router = useRouter();
-	const { user, isLoading } = useUser("student");
+	const { user, isLoading } = useUser();
+
 	const { data: dataMequestion, mutate } = useSWR("/api/users/solve");
 	const [solveFn, { data: solveData }] = useMutation("/api/users/solve");
 
@@ -30,6 +31,10 @@ const Home: NextPage = () => {
 		selectNum: 0,
 		index: 0,
 	});
+	console.log("home");
+	useEffect(() => {
+		console.log("user", user);
+	}, [user, isLoading]);
 
 	useEffect(() => {
 		if (dataMequestion?.ok) {
@@ -98,15 +103,24 @@ const Home: NextPage = () => {
 		if (selectQuestion.includes("0")) {
 			setwarningModal(true);
 		}
-	};
-	return dataMequestion?.ok ? (
-		<>
-			<div className="w-full h-screen">
-				{dataMequestion?.mequestion?.show === false ? (
+	}; /*
+	useEffect(() => {
+		if (user?.student !== "student") {
+			router.replace("enter");
+		}
+	}, [user]);
+
+	/*
+{dataMequestion?.mequestion?.show === false ? (
 					<ShowInitMessage handler={showonClick} name={user?.name + ""} />
 				) : (
 					""
 				)}
+
+	*/
+	return dataMequestion?.ok ? (
+		<>
+			<div className="w-full h-screen">
 				<div className="fixed w-full mt-2 h-10 flex items-center justify-between">
 					<div className="flex">
 						<div className="ml-20 font-bold text-lg">
@@ -159,6 +173,7 @@ const Home: NextPage = () => {
 						questionId={Number(aloneQuestion)}
 						btnonClick={onClick}
 						statebtn={select}
+						disabled={false}
 					/>
 				) : (
 					""

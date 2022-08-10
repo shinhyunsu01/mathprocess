@@ -25,6 +25,7 @@ const Enter = () => {
 	useEffect(() => {
 		if (data?.ok) {
 			if (data.user !== null) {
+				console.log("enteer ok");
 				if (data.user.student === "student") {
 					router.push("/");
 				} else if (data.user.student === "teacher") {

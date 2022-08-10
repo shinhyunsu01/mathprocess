@@ -10,11 +10,13 @@ async function handler(
 	let alonequestion;
 
 	if (req.method === "GET") {
+		console.log("bfore", alonequestion, req.query.id);
 		alonequestion = await client.questionDB.findFirst({
 			where: {
 				id: Number(req.query.id),
 			},
 		});
+		console.log("aftr", alonequestion, req.query.id);
 	}
 
 	res.json({

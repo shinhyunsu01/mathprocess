@@ -13,7 +13,7 @@ async function handler(
 	res: NextApiResponse<ResponseType>
 ) {
 	const {
-		body: { show, selectNum, index },
+		body: { show, selectNum, index, qnasubmit },
 		session: { user },
 	} = req;
 	let mequestion;
@@ -26,15 +26,14 @@ async function handler(
 		});
 	}
 	if (req.method === "POST") {
-		//let arr = [''];
-		if (show) {
-			let questionfind = await client.questions.findFirst({
-				where: {
-					userId: Number(user?.id),
-					qnasubmit: false,
-				},
-			});
+		let questionfind = await client.questions.findFirst({
+			where: {
+				userId: Number(user?.id),
+				qnasubmit: false,
+			},
+		});
 
+		if (show) {
 			mequestion = await client.questions.update({
 				where: {
 					id: questionfind?.id,
@@ -45,32 +44,28 @@ async function handler(
 			});
 		}
 		if (selectNum !== null && index != null) {
-			let findmequestion = await client.questions.findFirst({
-				where: {
-					userId: user?.id,
-					qnasubmit: false,
-				},
-			});
-			if (findmequestion?.selectQuestion) {
-				const arr = findmequestion?.selectQuestion?.split(",");
+			if (questionfind?.selectQuestion) {
+				const arr = questionfind?.selectQuestion?.split(",");
 				arr[index] = selectNum;
 
 				await client.questions.update({
 					where: {
-						id: findmequestion?.id,
+						id: questionfind?.id,
 					},
 					data: { selectQuestion: arr.toString() },
 				});
 			}
-
-			//console.log('after',arr);
-			/*
-			await client.questions.update({
+		}
+		if (qnasubmit) {
+			console.log("ok");
+			mequestion = await client.questions.update({
 				where: {
-					id: findmequestion?.id,
+					id: questionfind?.id,
 				},
-				data: {},
-			});*/
+				data: {
+					qnasubmit,
+				},
+			});
 		}
 	}
 	res.json({

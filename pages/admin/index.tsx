@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/Sidebar";
 import Students from "../../components/Students";
 import dynamic from "next/dynamic";
 import useUser from "../../libs/client/useUser";
+import { Router } from "express";
+import { useRouter } from "next/router";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const Admin = () => {
-	const { user, isLoading } = useUser("teacher");
-	console.log("admin ok");
+	const { user, isLoading } = useUser();
+	const router = useRouter();
+	useEffect(() => {
+		if (user?.student !== "teacher") {
+			router.replace("enter");
+		}
+	}, [user]);
+	console.log("admin ok", user);
 	return (
 		<div className="flex w-full">
 			<Sidebar />

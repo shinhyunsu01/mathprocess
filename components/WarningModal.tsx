@@ -1,10 +1,26 @@
-import React from "react";
+import { Router } from "express";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import useMutation from "../libs/client/useMutation";
 
 interface WarningModalType {
 	handler: any;
 }
 
 const WarningModal = ({ handler }: WarningModalType) => {
+	const [solveFn, { data }] = useMutation("/api/users/solve");
+	const router = useRouter();
+	const [state, setState] = useState(false);
+	const qnasubmitonClick = (e: any) => {
+		setState(true);
+		e.preventDefault();
+		solveFn({ qnasubmit: true });
+	};
+	useEffect(() => {
+		if (data) {
+			router.push("/result");
+		}
+	}, [data]);
 	return (
 		<div className=" fixed bg-opacity-70 bg-white z-20 top-0 w-full h-full flex items-center justify-center">
 			<div className=" items-center relative z-20 p-4 rounded-2xl bg-white shadow-lg shadow-slate-400  flex flex-col">
@@ -30,8 +46,37 @@ const WarningModal = ({ handler }: WarningModalType) => {
 				<br></br>
 				<br></br>
 				<div className="flex justify-center">
-					<button className="hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center">
-						전송
+					<button
+						onClick={qnasubmitonClick}
+						className="hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+					>
+						<div className="flex">
+							{state ? (
+								<svg
+									className="animate-spin -ml-1 mr-3 h-5 w-5 text-white group-hover:text-black"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+								>
+									<circle
+										className="opacity-25 "
+										cx="12"
+										cy="12"
+										r="10"
+										stroke="currentColor"
+										strokeWidth="4"
+									></circle>
+									<path
+										className="opacity-75"
+										fill="currentColor"
+										d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+									></path>
+								</svg>
+							) : (
+								""
+							)}
+							<div>전송</div>
+						</div>
 					</button>
 					<button
 						onClick={handler}

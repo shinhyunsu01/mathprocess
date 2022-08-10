@@ -20,23 +20,24 @@ async function handler(
 	} = req;
 
 	if (req.method === "GET") {
-		/*if (!user) {
+		/*	console.log("ddd", user);
+		if (!user) {
 			res.json({
 				ok: false,
 			});
 		} else {*/
-
 		const userInfo = await client.user.findUnique({
 			where: {
 				id: user?.id,
 			},
 		});
+		console.log("fined user", userInfo);
 		res.json({
 			ok: true,
 			userInfo,
 		});
+		//}
 	}
-	//}
 }
 
 export default withApiSession(
