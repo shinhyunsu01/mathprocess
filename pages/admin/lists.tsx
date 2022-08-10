@@ -7,7 +7,7 @@ import Students from "../../components/Students";
 import useUser from "../../libs/client/useUser";
 
 const Lists = () => {
-	const { user, isLoading } = useUser("teacher");
+	const { user, isLoading } = useUser();
 	const [grade, setGrade] = useState(1);
 	const onClick = (e: any) => {
 		setGrade(+e.target.id);
