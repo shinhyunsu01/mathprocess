@@ -15,7 +15,7 @@ interface uploadTypes {
 }
 
 const Upload = () => {
-	const { user, isLoading } = useUser("teacher");
+	const { user, isLoading } = useUser();
 	const {
 		register,
 		watch,
