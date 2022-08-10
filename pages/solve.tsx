@@ -7,7 +7,7 @@ import useUser from "../libs/client/useUser";
 import Image from "next/image";
 
 const Home: NextPage = () => {
-	const { user, isLoading } = useUser("student");
+	const { user, isLoading } = useUser();
 	const [select, setSelect] = useState(0);
 	const { data, error } = useSWR("/api/users");
 	const [totalQuestion, settotalQuestion] = useState([0]);
