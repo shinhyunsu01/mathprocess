@@ -26,9 +26,11 @@ const AddStudentModal = ({ handler, mutate }: addModalType) => {
 							name,
 							school,
 							grade,
+							qnasubmit: "false",
 						},
 					],
-				}
+				},
+			false
 		);
 		addFn({ name, school, grade });
 	};

@@ -19,7 +19,6 @@ const Enter = () => {
 	const [enterfn, { data, loading }] = useMutation("/api/users/enter");
 
 	const onValid = ({ username, payload }: enterTypes) => {
-		console.log("aa", username, payload);
 		enterfn({ name: username, payload });
 	};
 
@@ -39,7 +38,6 @@ const Enter = () => {
 				}, 1000);
 			}
 		}
-		console.log("data", data);
 	}, [data]);
 	return (
 		<div className="flex w-full h-screen items-center justify-center ">

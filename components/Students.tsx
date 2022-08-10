@@ -13,10 +13,6 @@ const Students = () => {
 		setAddState(true);
 	};
 
-	useEffect(() => {
-		console.log("daaaata", data);
-	}, [data]);
-
 	return (
 		<>
 			<div className="border-r w-48 flex flex-col border-r-gray-300 h-screen overflow-auto ">

@@ -42,13 +42,13 @@ async function handler(
 		});
 
 		//내 점수 obj
+
 		if (user?.score === null || user?.score === "") {
 			let str = "";
 			Object.keys(group).map((e) => {
 				str += `${e}_3,`;
 			});
 			str = str.slice(0, -1);
-
 			await client.user.update({
 				where: {
 					id: Number(req.query.id),
@@ -83,24 +83,51 @@ async function handler(
 		});
 	}
 	if (req.method === "POST") {
-		//console.log("post", allquestion, allquestion.toString());
-		/*
-		await client.questions.create({
+		await client.user.update({
+			where: {
+				id: Number(req.query.id),
+			},
 			data: {
-				qnasubmit: false,
-				question: allquestion.toString(),
+				qnasubmit: true,
+			},
+		});
+		let answer = [0];
+		let find;
+		let selectQuestion = "";
+		const aa = allquestion.map(async (e: any, i: number) => {
+			find = await client.questionDB.findFirst({
+				where: {
+					id: e,
+				},
+			});
+			if (find?.avatar) {
+				answer[i] = find.answer;
+			}
+			selectQuestion += "0,";
+			return;
+		});
+		await Promise.all(aa);
+		selectQuestion = selectQuestion.slice(0, -1);
 
-				user: {
-					connect: {
-						id: Number(req.query.id),
+		if (answer.length === allquestion.length) {
+			await client.questions.create({
+				data: {
+					qnasubmit: false,
+					question: allquestion.toString(),
+					selectQuestion,
+					answer: answer.toString(),
+					user: {
+						connect: {
+							id: Number(req.query.id),
+						},
 					},
 				},
-			},
-		});*/
+			});
 
-		res.json({
-			ok: true,
-		});
+			res.json({
+				ok: true,
+			});
+		}
 	}
 }
 

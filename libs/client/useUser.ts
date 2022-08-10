@@ -15,10 +15,12 @@ export default function useUser(student: string) {
 
 	useEffect(() => {
 		if (data && !data.ok) {
+			console.log("check point 1");
 			router.replace("/enter");
 		} else if (data && data.userInfo && data?.userInfo?.student !== student) {
+			console.log("check point 2");
 			router.replace("/enter");
 		}
-	}, [data]);
+	}, [data, router]);
 	return { user: data?.userInfo, isLoading: !data && !error };
 }

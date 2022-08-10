@@ -11,7 +11,6 @@ async function handler(
 	const { name, payload, school, grade } = req.body;
 	let user;
 	if (req.method === "POST") {
-		console.log("ddd", req.body);
 		if (name && payload) {
 			user = await client.user.findFirst({
 				where: {
@@ -26,7 +25,6 @@ async function handler(
 				await req.session.save();
 			}
 		} else if (name) {
-			console.log("asds");
 			const payload = Math.floor(100000 + Math.random() * 900000) + "";
 			user = await client.user.create({
 				data: {
@@ -37,7 +35,6 @@ async function handler(
 					grade: Number(grade),
 				},
 			});
-			console.log("create", user);
 		}
 	}
 	res.json({

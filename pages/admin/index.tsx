@@ -7,6 +7,7 @@ const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const Admin = () => {
 	const { user, isLoading } = useUser("teacher");
+	console.log("admin ok");
 	return (
 		<div className="flex w-full">
 			<Sidebar />

@@ -18,9 +18,7 @@ const Lists = () => {
 	};
 
 	const { data } = useSWR(`/api/question/all/${grade}`);
-	useEffect(() => {
-		console.log("openpic", openpic);
-	}, [openpic]);
+
 	return (
 		<>
 			<div className="flex w-full h-full">
@@ -106,8 +104,6 @@ const Lists = () => {
 											<div className="w-full  h-20 relative">
 												<Image
 													layout="fill"
-													width={100}
-													height={100}
 													src={`https://imagedelivery.net/fhkogDoSTeLvyDALpsIbnw/${e?.avatar}/public`}
 												/>
 											</div>

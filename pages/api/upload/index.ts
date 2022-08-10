@@ -12,7 +12,6 @@ async function handler(
 	let upload;
 
 	if (req.method === "POST") {
-		console.log("api post", req.body);
 		upload = await client.questionDB.create({
 			data: {
 				grade: Number(grade),
@@ -23,7 +22,6 @@ async function handler(
 				difficulty: Number(difficulty),
 			},
 		});
-		console.log("apiupload", upload);
 	}
 
 	res.json({

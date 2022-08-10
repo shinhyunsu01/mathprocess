@@ -36,7 +36,6 @@ const Upload = () => {
 	}: uploadTypes) => {
 		if (fileList && fileList.length > 0) {
 			const { uploadURL } = await (await fetch(`/api/upload/files`)).json();
-			console.log("uploadURL", uploadURL);
 			const form = new FormData();
 			form.append("file", fileList[0]);
 
@@ -46,16 +45,7 @@ const Upload = () => {
 				} = await (
 					await fetch(uploadURL, { method: "POST", body: form })
 				).json();
-				console.log(
-					"client",
-					grade,
-					kind,
-					answer,
-					fileList,
-					id,
-					minititle,
-					difficulty
-				);
+
 				uploadFn({ grade, kind, answer, avatar: id, minititle, difficulty });
 			}
 		}
@@ -64,13 +54,11 @@ const Upload = () => {
 	useEffect(() => {
 		if (file && file.length > 0) {
 			const filedata = file[0];
-			console.log(filedata);
 			setPhotoPreview(URL.createObjectURL(filedata));
 		}
 	}, [file]);
 
 	useEffect(() => {
-		console.log("data", data);
 		if (data?.ok) {
 			setokdb("ok!!");
 		}

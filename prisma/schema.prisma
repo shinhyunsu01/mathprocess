@@ -57,10 +57,12 @@ model Questions {
   userId Int
 
   question       String?
-  answer         String?
+  //questionAvatar String?
+  answer         String? @db.LongText
   selectQuestion String?
 
   qnasubmit Boolean
+  show      Boolean? @default(false)
 }
 
 model QuestionLog {

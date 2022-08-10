@@ -5,94 +5,173 @@ import useSWR from "swr";
 import useMutation from "../libs/client/useMutation";
 import useUser from "../libs/client/useUser";
 import Image from "next/image";
+import ShowInitMessage from "../components/ShowInitMessage";
+import AloneQuestion from "./[id]";
+import WarningModal from "../components/WarningModal";
+import { useRouter } from "next/router";
+
+interface totalQuestionType {
+	[key: string]: any;
+}
 
 const Home: NextPage = () => {
-	const [select, setSelect] = useState(0);
-	const { data, error } = useSWR("/api/users");
-	const [totalQuestion, settotalQuestion] = useState([0]);
+	const router = useRouter();
 	const { user, isLoading } = useUser("student");
-	//	const { data: mequestion } = useSWR("/api/users/mequestion");
+	const { data: dataMequestion, mutate } = useSWR("/api/users/solve");
+	const [solveFn, { data: solveData }] = useMutation("/api/users/solve");
 
-	const onClick = (e: any) => {
-		if (select === +e.target.value) {
-			setSelect(0);
-		} else setSelect(+e.target.value);
-	};
-	/*
+	const { data, error } = useSWR("/api/users");
+
+	const [totalQuestion, settotalQuestion] = useState<totalQuestionType>([""]);
+	const [aloneQuestion, setaloneQuestion] = useState<number>(0);
+	const [selectQuestion, setselectQuestion] = useState([""]);
+	const [warningModal, setwarningModal] = useState(false);
+	const [select, setSelect] = useState({
+		selectNum: 0,
+		index: 0,
+	});
+
 	useEffect(() => {
-		if (mequestion?.ok) {
-			console.log("mequestion", mequestion);
+		if (dataMequestion?.ok) {
+			if (dataMequestion.mequestion === null) {
+				router.replace("result");
+			} else {
+				let calData = dataMequestion?.mequestion?.question.split(",");
+				let selectData = dataMequestion?.mequestion?.selectQuestion.split(",");
+				settotalQuestion(calData);
+				setaloneQuestion(Number(calData[0]));
+				setselectQuestion(selectData);
+
+				setSelect({
+					selectNum: Number(selectData[0]),
+					index: 0,
+				});
+			}
 		}
-	}, [mequestion]);*/
+	}, [dataMequestion]);
 
-	return (
-		<div className="w-full h-screen">
-			<div className="fixed w-full mt-2 h-10 flex items-center">
-				<div className="ml-20 font-bold text-lg">
-					{data?.userInfo?.name} 학생
-				</div>
-				<div className="ml-2">
-					{data?.userInfo?.school} {data?.userInfo?.grade}학년
-				</div>
-				<div className="px-6 py-2 mr-2  bg-cyan-300 text-white rounded-full ml-auto text-center">
-					제출
-				</div>
-			</div>
+	const showonClick = () => {
+		mutate(
+			(prev: any) =>
+				prev && {
+					...prev,
+					mequestion: {
+						show: true,
+					},
+				},
+			false
+		);
+		solveFn({ show: true });
+	};
+	const onClick = (e: any) => {
+		if (select.selectNum === +e.target.value) {
+			setSelect((prev) => ({
+				...prev,
+				selectNum: 0,
+			}));
+			selectQuestion[select.index] = "0";
+			setselectQuestion(selectQuestion);
 
-			<div className="absolute pt-20 flex flex-col w-14 h-screen bg-gray-500 items-center">
-				{totalQuestion.map((date, i) => (
-					<div
-						key={i}
-						className="cursor-pointer rounded-md w-10 h-10 m-1 border-white border outline-none flex items-center justify-center relative"
-					>
-						<div className="text-white">{i + 1}</div>
+			solveFn({ selectNum: 0, index: select.index });
+		} else {
+			setSelect((prev) => ({
+				...prev,
+				selectNum: +e.target.value,
+			}));
+			selectQuestion[select.index] = e.target.value;
+			setselectQuestion(selectQuestion);
+			solveFn({ selectNum: +e.target.value, index: select.index });
+		}
+	};
 
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="h-5 w-5 absolute rounded-full  bg-blue-500 right-0 top-0 -mt-1 -mr-1"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-						>
-							<path
-								fillRule="evenodd"
-								d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-								clipRule="evenodd"
-							/>
-						</svg>
+	const onQuestionClick = (data: any, i: any) => {
+		setSelect({
+			selectNum: Number(selectQuestion[+i]),
+			index: +i,
+		});
+		setaloneQuestion(data);
+	};
+
+	const submitOnclick = (e: any) => {
+		e.preventDefault();
+
+		if (selectQuestion.includes("0")) {
+			setwarningModal(true);
+		}
+	};
+	return dataMequestion?.ok ? (
+		<>
+			<div className="w-full h-screen">
+				{dataMequestion?.mequestion?.show === false ? (
+					<ShowInitMessage handler={showonClick} name={user?.name + ""} />
+				) : (
+					""
+				)}
+				<div className="fixed w-full mt-2 h-10 flex items-center justify-between">
+					<div className="flex">
+						<div className="ml-20 font-bold text-lg">
+							{data?.userInfo?.name} 학생
+						</div>
+						<div className="ml-2">
+							{data?.userInfo?.school} {data?.userInfo?.grade}학년
+						</div>
 					</div>
-				))}
-			</div>
-			<div className="w-full h-full flex flex-col items-center justify-center">
-				<div className="h-16 w-5/6">1. 미분 적분</div>
-				<div className="bg-black rounded-2xl w-1/2 h-1/2 relative object-none">
-					<Image
-						layout="fill"
-						objectFit="contain"
-						width={100}
-						height={100}
-						src={`https://imagedelivery.net/fhkogDoSTeLvyDALpsIbnw/2a5cfaa2-ab4b-4636-b066-b8175d23a700/public`}
-					/>
+					<div></div>
+					<button
+						onClick={submitOnclick}
+						className="hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+					>
+						제출
+					</button>
 				</div>
 
-				<div className="mt-5 flex ">
-					{[1, 2, 3, 4, 5].map((date, i) => (
-						<button
+				<div className="absolute pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
+					<div className="font-bold">문제 </div>
+					<br></br>
+					{totalQuestion?.map((data: any, i: number) => (
+						<div
 							key={i}
-							value={i + 1}
-							onClick={onClick}
-							className={cls(
-								"m-5  w-9 h-9    rounded-lg flex  items-center justify-center  ",
-								select === i + 1
-									? "bg-slate-900 font-semibold text-white"
-									: "bg-white text-slate-700"
-							)}
+							onClick={() => onQuestionClick(data, i)}
+							className="cursor-pointer hover:bg-slate-300 rounded-md w-10 h-10 m-1 border-black border outline-none flex items-center justify-center relative"
 						>
-							{i + 1}
-						</button>
+							<div className="text-black">{i + 1}</div>
+							{Number(selectQuestion[+i]) !== 0 ? (
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-5 w-5 absolute rounded-full  bg-blue-500 right-0 top-0 -mt-1 -mr-1"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+								>
+									<path
+										fillRule="evenodd"
+										d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+										clipRule="evenodd"
+									/>
+								</svg>
+							) : (
+								""
+							)}
+						</div>
 					))}
 				</div>
+				{aloneQuestion ? (
+					<AloneQuestion
+						questionId={Number(aloneQuestion)}
+						btnonClick={onClick}
+						statebtn={select}
+					/>
+				) : (
+					""
+				)}
 			</div>
-		</div>
+			{warningModal ? (
+				<WarningModal handler={() => setwarningModal(false)} />
+			) : (
+				""
+			)}
+		</>
+	) : (
+		<div></div>
 	);
 };
 
