@@ -18,7 +18,7 @@ interface MakeType {
 }
 
 const UserId = () => {
-	const { user, isLoading } = useUser("teacher");
+	const { user, isLoading } = useUser();
 	let router = useRouter();
 
 	//const pageId = router.query.id !== undefined ? router.query.id : "";

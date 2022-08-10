@@ -23,9 +23,6 @@ const AloneQuestion = ({
 		btnonClick(e);
 	};
 
-	useEffect(() => {
-		console.log("111data", data, questionId);
-	}, [data]);
 	return (
 		<div className="w-full h-full  flex flex-col items-center justify-center">
 			<div className="flex">
