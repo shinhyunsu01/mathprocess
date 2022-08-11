@@ -122,6 +122,11 @@ const Home: NextPage = () => {
 	return (
 		<>
 			<div className="w-full h-screen">
+				{dataMequestion?.mequestion?.show === false ? (
+					<ShowInitMessage handler={showonClick} name={user?.name + ""} />
+				) : (
+					""
+				)}
 				<div className="fixed w-full mt-2 h-10 flex items-center justify-between">
 					<div className="flex">
 						<div className="ml-20 font-bold text-lg">{user?.name} 학생</div>
@@ -180,11 +185,6 @@ const Home: NextPage = () => {
 			</div>
 			{warningModal ? (
 				<WarningModal handler={() => setwarningModal(false)} />
-			) : (
-				""
-			)}
-			{dataMequestion?.mequestion?.show === false ? (
-				<ShowInitMessage handler={showonClick} name={user?.name + ""} />
 			) : (
 				""
 			)}
