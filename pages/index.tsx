@@ -39,14 +39,15 @@ const Home: NextPage = () => {
 
 	useEffect(() => {
 		if (dataMequestion?.ok) {
+			console.log("oroiginn", dataMequestion);
 			if (dataMequestion.mequestion === null) {
 				router.replace("result");
 			} else {
 				if (dataMequestion?.mequestion) {
 					console.log("???", dataMequestion?.mequestion, dataMequestion);
-					let calData = dataMequestion?.mequestion.question.split(",");
+					let calData = dataMequestion?.mequestion?.question?.split(",");
 					let selectData =
-						dataMequestion?.mequestion?.selectQuestion.split(",");
+						dataMequestion?.mequestion?.selectQuestion?.split(",");
 					console.log("!!!!", dataMequestion?.mequestion, dataMequestion);
 					settotalQuestion(calData);
 					setaloneQuestion(Number(calData[0]));
@@ -67,6 +68,7 @@ const Home: NextPage = () => {
 				prev && {
 					...prev,
 					mequestion: {
+						...prev.mequestion,
 						show: true,
 					},
 				},

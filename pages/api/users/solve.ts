@@ -23,6 +23,7 @@ async function handler(
 				qnasubmit: false,
 			},
 		});
+		console.log("getmequestion", mequestion);
 	}
 	if (req.method === "POST") {
 		let questionfind = await client.questions.findFirst({
@@ -131,6 +132,7 @@ async function handler(
 			});
 		}
 	}
+	console.log("resut", mequestion);
 	res.json({
 		ok: true,
 		mequestion,
