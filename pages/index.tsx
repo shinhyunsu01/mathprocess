@@ -45,6 +45,7 @@ const Home: NextPage = () => {
 				console.log("???", dataMequestion?.mequestion, dataMequestion);
 				let calData = dataMequestion?.mequestion?.question.split(",");
 				let selectData = dataMequestion?.mequestion?.selectQuestion.split(",");
+				console.log("!!!!", dataMequestion?.mequestion, dataMequestion);
 				settotalQuestion(calData);
 				setaloneQuestion(Number(calData[0]));
 				setselectQuestion(selectData);
