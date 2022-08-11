@@ -125,7 +125,7 @@ async function handler(
 			selectQuestion += "0,";
 			return;
 		});
-		await Promise.all([aa, userquestions]);
+		await Promise.all(aa);
 		selectQuestion = selectQuestion.slice(0, -1);
 
 		if (answer.length === allquestion.length) {
