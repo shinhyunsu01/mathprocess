@@ -42,18 +42,21 @@ const Home: NextPage = () => {
 			if (dataMequestion.mequestion === null) {
 				router.replace("result");
 			} else {
-				console.log("???", dataMequestion?.mequestion, dataMequestion);
-				let calData = dataMequestion?.mequestion?.question.split(",");
-				let selectData = dataMequestion?.mequestion?.selectQuestion.split(",");
-				console.log("!!!!", dataMequestion?.mequestion, dataMequestion);
-				settotalQuestion(calData);
-				setaloneQuestion(Number(calData[0]));
-				setselectQuestion(selectData);
+				if (dataMequestion?.mequestion) {
+					console.log("???", dataMequestion?.mequestion, dataMequestion);
+					let calData = dataMequestion?.mequestion.question.split(",");
+					let selectData =
+						dataMequestion?.mequestion?.selectQuestion.split(",");
+					console.log("!!!!", dataMequestion?.mequestion, dataMequestion);
+					settotalQuestion(calData);
+					setaloneQuestion(Number(calData[0]));
+					setselectQuestion(selectData);
 
-				setSelect({
-					selectNum: Number(selectData[0]),
-					index: 0,
-				});
+					setSelect({
+						selectNum: Number(selectData[0]),
+						index: 0,
+					});
+				}
 			}
 		}
 	}, [dataMequestion]);
