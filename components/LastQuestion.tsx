@@ -22,6 +22,7 @@ const LastQuestion = ({ aloneQuestion }: LastQuestionType) => {
 		<div className=" absolute w-full pb-6 whitespace-nowrap flex scroll overflow-x-auto ">
 			{data?.all?.map((ee: any, i: number) => (
 				<button
+					key={i}
 					className="p-4 mx-2 bg-black rounded-lg text-white"
 					onClick={() => onClick(i)}
 				>
