@@ -174,7 +174,8 @@ const UserId = () => {
 				</div>
 				<div className=" relative flex flex-col w-full h-full mt-4 mx-10 ">
 					<LastQuestion aloneQuestion={setAloneQuestion} />
-					<div className="relative w-2/4 mt-20">
+
+					<div className="relative w-2/4 mt-24">
 						<ApexChart
 							type="bar"
 							series={[
@@ -208,7 +209,13 @@ const UserId = () => {
 							}}
 						/>
 					</div>
-
+					<div className="w-full font-bold text-lg">
+						인증 번호
+						<span className="font-normal border-b-2 border-blue-300">
+							{"  "}
+							{selectUser?.userInfo?.payload}
+						</span>
+					</div>
 					<div
 						className={cls(
 							"w-full overflow-scroll relative rounded-2xl shadow-lg  shadow-slate-400",
