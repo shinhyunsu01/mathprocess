@@ -119,7 +119,7 @@ const Home: NextPage = () => {
 				)}
 
 	*/
-	return dataMequestion?.ok ? (
+	return (
 		<>
 			<div className="w-full h-screen">
 				<div className="fixed w-full mt-2 h-10 flex items-center justify-between">
@@ -183,9 +183,12 @@ const Home: NextPage = () => {
 			) : (
 				""
 			)}
+			{dataMequestion?.mequestion?.show === false ? (
+				<ShowInitMessage handler={showonClick} name={user?.name + ""} />
+			) : (
+				""
+			)}
 		</>
-	) : (
-		<div></div>
 	);
 };
 
