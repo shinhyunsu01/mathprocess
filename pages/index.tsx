@@ -42,7 +42,7 @@ const Home: NextPage = () => {
 			if (dataMequestion.mequestion === null) {
 				router.replace("result");
 			} else {
-				console.log("???", dataMequestion?.mequestion?, dataMequestion);
+				console.log("???", dataMequestion?.mequestion, dataMequestion);
 				let calData = dataMequestion?.mequestion?.question.split(",");
 				let selectData = dataMequestion?.mequestion?.selectQuestion.split(",");
 				settotalQuestion(calData);
