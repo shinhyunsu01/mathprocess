@@ -19,6 +19,14 @@ async function handler(
 
 	if (req.method === "GET") {
 		let canQuestion;
+
+		const userquestions = await client.questions.findMany({
+			where: {
+				qnasubmit: true,
+				userId: Number(req.query.id),
+			},
+		});
+
 		const user = await client.user.findUnique({
 			where: {
 				id: Number(req.query.id),
@@ -29,6 +37,18 @@ async function handler(
 			where: {
 				grade: Number(user?.grade),
 			},
+		});
+
+		let questionstr = "";
+
+		let mequestion = new Map();
+		userquestions?.map((ee) => {
+			let sum = "," + ee.question;
+			questionstr += sum;
+		});
+		let questionarr = questionstr.split(",");
+		questionarr.map((ee) => {
+			mequestion.set(Number(ee), 1);
 		});
 
 		//문제key 로 obj 생성
@@ -42,7 +62,6 @@ async function handler(
 		});
 
 		//내 점수 obj
-
 		if (user?.score === null || user?.score === "") {
 			let str = "";
 			Object.keys(group).map((e) => {
@@ -72,7 +91,7 @@ async function handler(
 			//시험 문제로 할수 있는지...
 			group[key].map((ques: any) => {
 				if (+ques.difficulty === nowPosGrade) {
-					canQuestions.push(ques);
+					if (!mequestion.has(ques.id)) canQuestions.push(ques);
 				}
 			});
 		});
@@ -106,7 +125,7 @@ async function handler(
 			selectQuestion += "0,";
 			return;
 		});
-		await Promise.all(aa);
+		await Promise.all([aa, userquestions]);
 		selectQuestion = selectQuestion.slice(0, -1);
 
 		if (answer.length === allquestion.length) {

@@ -29,12 +29,6 @@ const Result = () => {
 	};
 
 	useEffect(() => {
-		console.log("quesInfo", quesInfo);
-	}, [quesInfo]);
-
-	useEffect(() => {
-		console.log("data", data);
-
 		let selectdata = data?.manyquestion[0];
 		let selectQues = selectdata?.selectQuestion.split(",");
 		let ques = selectdata?.question.split(",");

@@ -23,6 +23,17 @@ async function handler(
 					id: user.id,
 				};
 				await req.session.save();
+
+				//if (req.session.user) {
+				res.json({
+					ok: true,
+					user,
+				});
+				//}
+			} else {
+				res.json({
+					ok: false,
+				});
 			}
 		} else if (name) {
 			const payload = Math.floor(100000 + Math.random() * 900000) + "";
@@ -35,13 +46,12 @@ async function handler(
 					grade: Number(grade),
 				},
 			});
+			res.json({
+				ok: true,
+				user,
+			});
 		}
 	}
-
-	res.json({
-		ok: true,
-		user,
-	});
 }
 
 export default withApiSession(

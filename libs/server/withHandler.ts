@@ -28,13 +28,12 @@ export default function withHandler({
 		}
 
 		if (isPrivate && !req.session.user) {
-			console.log("error2");
-			return res.status(401).json({ ok: false, error: "plz log in" });
+			return res.status(401).json({ ok: false, error: "Plz log in." });
 		}
 		try {
 			await handler(req, res);
 		} catch (error) {
-			console.log("error", req.query.id);
+			console.log("error");
 			return res.status(500).json({ error });
 		}
 	};

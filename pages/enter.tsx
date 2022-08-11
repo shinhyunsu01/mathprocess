@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useSWRConfig } from "swr";
 import Bubble from "../components/Bubble";
 import useMutation from "../libs/client/useMutation";
 
@@ -9,6 +10,8 @@ interface enterTypes {
 	payload: string;
 }
 const Enter = () => {
+	const { cache } = useSWRConfig();
+	cache.delete("/api/users");
 	const router = useRouter();
 	const {
 		register,
@@ -16,21 +19,22 @@ const Enter = () => {
 		reset,
 		formState: { errors },
 	} = useForm<enterTypes>();
-	const [enterfn, { data, loading }] = useMutation("/api/users/enter");
+	const [enterfn, { data, loading, error }] = useMutation("/api/users/enter");
 
 	const onValid = ({ username, payload }: enterTypes) => {
 		enterfn({ name: username, payload });
 	};
 
 	useEffect(() => {
-		if (data?.ok) {
-			if (data.user !== null) {
-				console.log("enteer ok");
-				if (data.user.student === "student") {
-					router.push("/");
-				} else if (data.user.student === "teacher") {
-					router.push("/admin");
-				}
+		if (data?.ok && !loading) {
+			//setTimeout(() => {
+			if (data.user.student === "student") {
+				router.push("/");
+			} else if (data.user.student === "teacher") {
+				router.push("/admin");
+			}
+			//}, 1000);
+			if (data.user) {
 			} else {
 				setTimeout(() => {
 					reset();
@@ -38,6 +42,15 @@ const Enter = () => {
 					data.user = null;
 				}, 1000);
 			}
+		} else if (data?.ok === false) {
+			setTimeout(() => {
+				reset();
+				data.ok = false;
+				data.user = null;
+			}, 1000);
+		}
+		if (error) {
+			router.reload();
 		}
 	}, [data]);
 	return (

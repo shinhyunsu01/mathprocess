@@ -18,12 +18,6 @@ const Home: NextPage = () => {
 			setSelect(0);
 		} else setSelect(+e.target.value);
 	};
-	/*
-	useEffect(() => {
-		if (mequestion?.ok) {
-			console.log("mequestion", mequestion);
-		}
-	}, [mequestion]);*/
 
 	return (
 		<div className="w-full h-screen">

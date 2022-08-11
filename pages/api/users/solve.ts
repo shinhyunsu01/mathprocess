@@ -56,7 +56,71 @@ async function handler(
 			}
 		}
 		if (qnasubmit) {
-			console.log("ok");
+			let allscore = "";
+			const finduser = await client.user.findUnique({
+				where: {
+					id: Number(user?.id),
+				},
+			});
+			if (
+				questionfind?.answer &&
+				questionfind.selectQuestion &&
+				questionfind.question &&
+				finduser
+			) {
+				let score = finduser.score?.split(",");
+				let answer = questionfind.answer?.split(",");
+				let select = questionfind.selectQuestion.split(",");
+				let question = questionfind.question.split(",");
+
+				const allquestion = await Promise.all(
+					question.map(async (data) => {
+						const res = await client.questionDB.findFirst({
+							where: {
+								id: Number(data),
+							},
+							select: {
+								id: true,
+								kind: true,
+								answer: true,
+							},
+						});
+						return res;
+					})
+				);
+
+				score?.map(async (data, i) => {
+					let my = data.split("_");
+					let kind = my[0];
+					let grade = Number(my[1]);
+
+					const filter: any = allquestion.filter(
+						(data: any) => data.kind === kind
+					);
+
+					question.map((ee, ii) => {
+						if (Number(ee) === filter[0].id) {
+							if (select[ii] !== answer[ii]) {
+								grade = grade - 1;
+							} else {
+								grade = grade + 1;
+							}
+						}
+					});
+					allscore += kind + "_" + grade + ",";
+				});
+				allscore = allscore.slice(0, -1);
+			}
+
+			await client.user.update({
+				where: {
+					id: Number(user?.id),
+				},
+				data: {
+					score: allscore,
+					qnasubmit: false,
+				},
+			});
 			mequestion = await client.questions.update({
 				where: {
 					id: questionfind?.id,

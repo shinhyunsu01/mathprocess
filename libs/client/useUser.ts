@@ -1,7 +1,7 @@
 import { User } from ".prisma/client";
 import { useRouter } from "next/router";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 interface UserType {
@@ -10,20 +10,17 @@ interface UserType {
 }
 
 export default function useUser() {
-	const { data, error, mutate } = useSWR<UserType>("/api/users");
+	//const fetcher = url: => fetch(url).then((r) => r.json());
+	const { data, error, mutate } = useSWR("/api/users", {
+		refreshInterval: 100,
+	});
 	const router = useRouter();
-
 	useEffect(() => {
-		//console.log("c ", data);
-		if (!data && !error) {
-			console.log("check point 1", data, "|");
+		if (data && !data.ok) {
 			router.replace("/enter");
 		}
-		/*else if (data && data.userInfo && data?.userInfo?.student !== student) {
-			console.log("check point 2");
-			router.replace("/enter");
-		}*/
-	}, [data, router, error]);
+	}, [data, router]);
+
 	return { user: data?.userInfo, isLoading: !data && !error };
 
 	/*console.log("jjj", data?.userInfo?.student);

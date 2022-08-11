@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import withHandler, { ResponseType } from "../../../libs/server/withHandler";
-import client from "../../../libs/server/client";
-import { withApiSession } from "../../../libs/server/withSession";
+import withHandler, {
+	ResponseType,
+} from "../../../../../libs/server/withHandler";
+import client from "../../../../../libs/server/client";
+import { withApiSession } from "../../../../../libs/server/withSession";
 
 async function handler(
 	req: NextApiRequest,
@@ -9,13 +11,14 @@ async function handler(
 ) {
 	const {
 		session: { user },
+		body: {},
 	} = req;
-	let manyquestion;
+	let all;
 
 	if (req.method === "GET") {
-		manyquestion = await client.questions.findMany({
+		all = await client.questions.findMany({
 			where: {
-				userId: user?.id,
+				userId: Number(req?.query?.id),
 				qnasubmit: true,
 			},
 		});
@@ -23,7 +26,7 @@ async function handler(
 
 	res.json({
 		ok: true,
-		manyquestion,
+		all,
 	});
 }
 

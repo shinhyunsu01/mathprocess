@@ -5,23 +5,34 @@ import dynamic from "next/dynamic";
 import useUser from "../../libs/client/useUser";
 import { Router } from "express";
 import { useRouter } from "next/router";
+import useSWR from "swr";
+import { User } from ".prisma/client";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
+interface UserType {
+	ok: boolean;
+	userInfo: User;
+}
 const Admin = () => {
 	const { user, isLoading } = useUser();
 	const router = useRouter();
 	useEffect(() => {
-		if (user?.student !== "teacher") {
-			router.replace("enter");
+		if (user && user.student !== "teacher") {
+			router.replace("/");
 		}
-	}, [user]);
-	console.log("admin ok", user);
+	}, [user, isLoading]);
 	return (
-		<div className="flex w-full">
+		<div className="flex w-full h-full">
 			<Sidebar />
 			<Students />
-			<div>
-				<ApexChart
+			<div className="w-full"></div>
+		</div>
+	);
+};
+
+export default Admin;
+/*
+
+<ApexChart
 					type="donut"
 					series={[44, 55, 41, 17]}
 					options={{
@@ -43,9 +54,4 @@ const Admin = () => {
 						],
 					}}
 				/>
-			</div>
-		</div>
-	);
-};
-
-export default Admin;
+*/

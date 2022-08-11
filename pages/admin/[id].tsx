@@ -10,6 +10,8 @@ import Image from "next/image";
 import { cls } from "../../libs/client/utils";
 import OpenPicModal from "../../components/openPicModal";
 import ErrorModal from "../../components/ErrorModal";
+import QuestionList from "../../components/QuestionList";
+import LastQuestion from "../../components/LastQuestion";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 interface MakeType {
@@ -18,11 +20,8 @@ interface MakeType {
 }
 
 const UserId = () => {
-	const { user, isLoading } = useUser();
+	//const { user, isLoading } = useUser();
 	let router = useRouter();
-
-	//const pageId = router.query.id !== undefined ? router.query.id : "";
-
 	const { data } = useSWR<MakeType>(
 		router.query.id ? `/api/question/make/${router.query.id}` : null
 	);
@@ -50,6 +49,7 @@ const UserId = () => {
 	const [chartVal, setchartVal] = useState<number[]>([]);
 	const [errorModal, setErrorModal] = useState(false);
 	const [submittloading, setsutmitLoading] = useState(false);
+	const [aloneQuestion, setAloneQuestion] = useState();
 	const [openpic, setopenpic] = useState("");
 
 	const closeHandler = () => {
@@ -85,6 +85,7 @@ const UserId = () => {
 
 		makeFn({ allquestion: selectQues });
 	};
+
 	useEffect(() => {
 		if (selectUser?.userInfo?.score) {
 			let score = selectUser?.userInfo?.score;
@@ -124,28 +125,12 @@ const UserId = () => {
 		setselectQues(arr);
 	}, [data]);
 
-	/*
-<div className="grid grid-cols-10 gap-2 ">
-						{[1, 2, 3, 4, 5, 67, 8, 9, 10].map((_, i) => (
-							<div
-								key={i}
-								className="flex flex-col bg-black p-2 w-20 rounded-2xl text-white"
-							>
-								<div>미분</div>
-								<div>
-									<span>1</span>
-									<span>/10</span>
-								</div>
-							</div>
-						))}
-					</div>
-
-*/
 	return (
 		<>
-			<div className="flex w-full ">
+			<div className="flex w-full h-full  ">
 				<Sidebar />
 				<Students />
+				<QuestionList aloneQuestion={aloneQuestion} />
 				<div className="fixed z-30 top-3 right-5 flex ">
 					{selectUser?.userInfo?.qnasubmit === false ? (
 						<div
@@ -187,8 +172,9 @@ const UserId = () => {
 						</div>
 					)}
 				</div>
-				<div className="flex flex-col w-full  items-center mt-4 mr-10 ">
-					<div className=" w-2/4">
+				<div className=" relative flex flex-col w-full h-full mt-4 mx-10 ">
+					<LastQuestion aloneQuestion={setAloneQuestion} />
+					<div className="relative w-2/4 mt-20">
 						<ApexChart
 							type="bar"
 							series={[
@@ -225,70 +211,70 @@ const UserId = () => {
 
 					<div
 						className={cls(
-							"w-full  overflow-scroll relative rounded-2xl shadow-lg  shadow-slate-400",
-							data?.canQuestions.length === 0 ? "h-8" : "h-[460px]"
+							"w-full overflow-scroll relative rounded-2xl shadow-lg  shadow-slate-400",
+							data?.canQuestions.length === 0 ? "h-30" : "h-[460px]"
 						)}
 					>
-						<table className="w-full h-full relative  mt-auto text-center border-collapse ">
-							{data?.canQuestions && selectUser?.userInfo?.qnasubmit ? (
-								<div className="z-40 absolute w-full bg-white opacity-80 h-full flex items-center justify-center">
-									<div className="text-2xl font-bold">시험 중 입니다</div>
-								</div>
-							) : (
-								""
-							)}
-							<thead className="sticky top-0 z-10 bg-white">
-								<tr>
-									<th></th>
-									<th>유형</th>
-									<th>난이도</th>
-									<th>타이틀</th>
-									<th>이미지</th>
-								</tr>
-							</thead>
-							{data?.canQuestions?.map((ee: any, i: number) => (
-								<tbody
-									key={i}
-									className="h-14 overflow-y-auto  hover:bg-slate-200"
-								>
+						{data?.canQuestions && selectUser?.userInfo?.qnasubmit ? (
+							<div className="z-40 absolute w-full h-full bg-slate-300 opacity-80 flex items-center justify-center">
+								<div className="text-2xl font-bold">시험 중 입니다</div>
+							</div>
+						) : (
+							<table className="w-full  relative  mt-auto text-center border-collapse ">
+								<thead className="sticky top-0 z-10 h-14 bg-white ">
 									<tr>
-										<td className="cursor-pointer">
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className={cls(
-													"h-8 w-8",
-													selectQues.includes(ee.id)
-														? "fill-green-500"
-														: "fill-current"
-												)}
-												viewBox="0 0 20 20"
-												onClick={() => onClick(ee)}
-											>
-												<path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-												<path
-													fillRule="evenodd"
-													d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-													clipRule="evenodd"
-												/>
-											</svg>
-										</td>
-										<td>{ee.kind}</td>
-										<td>{ee.difficulty}</td>
-										<td>{ee.minititle}</td>
-										<td>
-											<div className="w-full  h-20 relative cursor-pointer">
-												<Image
-													onClick={() => setopenpic(ee?.avatar)}
-													layout="fill"
-													objectFit="contain"
-													src={`https://imagedelivery.net/fhkogDoSTeLvyDALpsIbnw/${ee?.avatar}/public`}
-												/>
-											</div>
-										</td>
+										<th></th>
+										<th>유형</th>
+										<th>난이도</th>
+										<th>타이틀</th>
+										<th>이미지</th>
 									</tr>
-								</tbody>
-							))}
-						</table>
+								</thead>
+
+								{data?.canQuestions?.map((ee: any, i: number) => (
+									<tbody
+										key={i}
+										className="h-14 overflow-y-auto  hover:bg-slate-200"
+									>
+										<tr>
+											<td className="cursor-pointer">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													className={cls(
+														"h-8 w-8",
+														selectQues.includes(ee.id)
+															? "fill-green-500"
+															: "fill-current"
+													)}
+													viewBox="0 0 20 20"
+													onClick={() => onClick(ee)}
+												>
+													<path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+													<path
+														fillRule="evenodd"
+														d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+														clipRule="evenodd"
+													/>
+												</svg>
+											</td>
+											<td>{ee.kind}</td>
+											<td>{ee.difficulty}</td>
+											<td>{ee.minititle}</td>
+											<td>
+												<div className="w-full  h-20 relative cursor-pointer">
+													<Image
+														onClick={() => setopenpic(ee?.avatar)}
+														layout="fill"
+														objectFit="contain"
+														src={`https://imagedelivery.net/fhkogDoSTeLvyDALpsIbnw/${ee?.avatar}/public`}
+													/>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								))}
+							</table>
+						)}
 					</div>
 				</div>
 			</div>

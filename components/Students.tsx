@@ -15,7 +15,7 @@ const Students = () => {
 
 	return (
 		<>
-			<div className="border-r w-48 flex flex-col border-r-gray-300 h-screen overflow-auto ">
+			<div className="border-r w-52 flex flex-col border-r-gray-300 h-screen overflow-auto ">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					className="h-6 w-6 ml-auto mr-1 mt-2 cursor-pointer"

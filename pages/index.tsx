@@ -21,7 +21,7 @@ const Home: NextPage = () => {
 	const { data: dataMequestion, mutate } = useSWR("/api/users/solve");
 	const [solveFn, { data: solveData }] = useMutation("/api/users/solve");
 
-	const { data, error } = useSWR("/api/users");
+	//const { data, error } = useSWR("/api/users");
 
 	const [totalQuestion, settotalQuestion] = useState<totalQuestionType>([""]);
 	const [aloneQuestion, setaloneQuestion] = useState<number>(0);
@@ -31,9 +31,10 @@ const Home: NextPage = () => {
 		selectNum: 0,
 		index: 0,
 	});
-	console.log("home");
 	useEffect(() => {
-		console.log("user", user);
+		if (user && user.student !== "student") {
+			router.push("/admin");
+		}
 	}, [user, isLoading]);
 
 	useEffect(() => {
@@ -123,11 +124,9 @@ const Home: NextPage = () => {
 			<div className="w-full h-screen">
 				<div className="fixed w-full mt-2 h-10 flex items-center justify-between">
 					<div className="flex">
-						<div className="ml-20 font-bold text-lg">
-							{data?.userInfo?.name} 학생
-						</div>
+						<div className="ml-20 font-bold text-lg">{user?.name} 학생</div>
 						<div className="ml-2">
-							{data?.userInfo?.school} {data?.userInfo?.grade}학년
+							{user?.school} {user?.grade}학년
 						</div>
 					</div>
 					<div></div>

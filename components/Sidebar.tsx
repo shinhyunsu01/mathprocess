@@ -3,7 +3,7 @@ import React from "react";
 
 const Sidebar = () => {
 	return (
-		<div className="border-r w-14 flex flex-col border-r-gray-300 h-screen items-center">
+		<div className="border-r w-20  flex flex-col border-r-gray-300 items-center">
 			<div className="h-14 flex justify-center items-center w-full group  hover:bg-black hover:rounded-lg">
 				<Link href="/admin">
 					<a>

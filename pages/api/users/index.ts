@@ -15,28 +15,17 @@ async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<ResponseType>
 ) {
-	const {
-		session: { user },
-	} = req;
-
 	if (req.method === "GET") {
-		/*	console.log("ddd", user);
-		if (!user) {
-			res.json({
-				ok: false,
-			});
-		} else {*/
 		const userInfo = await client.user.findUnique({
 			where: {
-				id: user?.id,
+				id: req.session.user?.id,
 			},
 		});
-		console.log("fined user", userInfo);
+
 		res.json({
 			ok: true,
 			userInfo,
 		});
-		//}
 	}
 }
 
