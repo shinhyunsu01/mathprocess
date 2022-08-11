@@ -71,7 +71,7 @@ const UserId = () => {
 	const submitonClick = () => {
 		setsutmitLoading(true);
 		let mapsubmit = new Map();
-		for (let cnt = 0; cnt < selectQues.length; cnt++) {
+		for (let cnt = 0; cnt < selectQues?.length; cnt++) {
 			data?.canQuestions.map((ee: any) => {
 				if (ee.id === selectQues[cnt]) {
 					if (mapsubmit.has(ee.kind)) {
@@ -212,7 +212,7 @@ const UserId = () => {
 					<div
 						className={cls(
 							"w-full overflow-scroll relative rounded-2xl shadow-lg  shadow-slate-400",
-							data?.canQuestions.length === 0 ? "h-30" : "h-[460px]"
+							data?.canQuestions?.length === 0 ? "h-30" : "h-[460px]"
 						)}
 					>
 						{data?.canQuestions && selectUser?.userInfo?.qnasubmit ? (
