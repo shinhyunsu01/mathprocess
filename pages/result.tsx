@@ -52,9 +52,9 @@ const Result = () => {
 	}, [data]);
 	return (
 		<>
-			<div className="w-full h-full flex">
+			<div className="w-full h-full ">
 				<div className=" fixed z-20 top-2 left-20 w-full flex items-center ">
-					{data?.manyquestion.map((e: any, i: any) => (
+					{data?.manyquestion?.map((e: any, i: any) => (
 						<button
 							key={i}
 							onClick={() => onClick(e, i)}
@@ -68,35 +68,37 @@ const Result = () => {
 						</button>
 					))}
 				</div>
-				<div className=" pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
-					<div className="font-bold">문제</div>
-					<br></br>
+				<div className="fixed pt-20  w-20 px-4 h-full bg-white border-r-2 border-slate-400">
+					<div className="flex flex-col w-full  items-center">
+						<div className="font-bold  ">문제</div>
+						<br></br>
 
-					{selectQuestion?.map((data: any, i: number) => (
-						<div
-							key={i}
-							className={cls(
-								"cursor-pointer hover:bg-slate-300 rounded-md w-10 h-10 m-1 border-black border outline-none flex items-center justify-center relative",
-								result[i] !== true ? "bg-red-500" : "bg-green-500"
-							)}
-							onClick={() => quesonClick(i)}
-						>
-							<div className="text-black">{i + 1}</div>
-
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-5 w-5 absolute rounded-full   right-0 top-0 -mt-1 -mr-1"
-								viewBox="0 0 20 20"
-								fill="currentColor"
+						{selectQuestion?.map((data: any, i: number) => (
+							<div
+								key={i}
+								className={cls(
+									"cursor-pointer hover:bg-slate-300 rounded-md w-full h-10 m-1 border-black border outline-none flex items-center justify-center relative",
+									result[i] !== true ? "bg-red-500" : "bg-green-500"
+								)}
+								onClick={() => quesonClick(i)}
 							>
-								<path
-									fillRule="evenodd"
-									d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-									clipRule="evenodd"
-								/>
-							</svg>
-						</div>
-					))}
+								<div className="text-black">{i + 1}</div>
+
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-5 w-5 absolute rounded-full   right-0 top-0 -mt-1 -mr-1"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+								>
+									<path
+										fillRule="evenodd"
+										d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+										clipRule="evenodd"
+									/>
+								</svg>
+							</div>
+						))}
+					</div>
 				</div>
 				<AloneQuestion
 					statebtn={quesInfo}

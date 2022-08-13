@@ -128,7 +128,7 @@ const Home: NextPage = () => {
 	*/
 	return (
 		<>
-			<div className="w-full h-screen">
+			<div className="w-full h-full">
 				{dataMequestion?.mequestion?.show === false ? (
 					<ShowInitMessage handler={showonClick} name={user?.name + ""} />
 				) : (

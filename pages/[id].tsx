@@ -24,7 +24,7 @@ const AloneQuestion = ({
 	};
 
 	return (
-		<div className="w-full h-full  flex flex-col items-center justify-center">
+		<div className="pl-20 mx-auto w-full h-full  flex flex-col items-center justify-center">
 			<div className="flex">
 				<div className="font-bold text-4xl">{statebtn?.index + 1} </div>
 				<div className="mt-auto">번 문제 </div>
@@ -32,7 +32,7 @@ const AloneQuestion = ({
 
 			<br></br>
 
-			<div className="bg-black rounded-2xl w-1/2 h-1/2 relative object-none">
+			<div className="bg-black rounded-2xl w-48 h-48 relative">
 				<Image
 					objectFit="contain"
 					layout="fill"
@@ -48,7 +48,7 @@ const AloneQuestion = ({
 						disabled={disabled}
 						onClick={onClick}
 						className={cls(
-							"m-5  w-9 h-9    rounded-lg flex  items-center justify-center  ",
+							" w-9 h-9 rounded-lg flex  items-center justify-center  ",
 							statebtn?.selectNum === i + 1
 								? "bg-slate-900 font-semibold text-white"
 								: "bg-white text-slate-700"
