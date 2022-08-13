@@ -9,7 +9,6 @@ import ShowInitMessage from "../components/ShowInitMessage";
 import AloneQuestion from "./[id]";
 import WarningModal from "../components/WarningModal";
 import { useRouter } from "next/router";
-import Paint from "./Paint";
 
 interface totalQuestionType {
 	[key: string]: any;
