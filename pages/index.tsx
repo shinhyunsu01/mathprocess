@@ -134,12 +134,11 @@ const Home: NextPage = () => {
 				) : (
 					""
 				)}
-				<div className="fixed w-full mt-2 h-10 flex items-center justify-between">
-					<div className="flex">
-						<div className="ml-20 font-bold text-lg">{user?.name} 학생</div>
-						<div className="ml-2">
-							{user?.school} {user?.grade}학년
-						</div>
+				<div className="fixed w-full mt-8 h-10 flex items-center justify-between">
+					<div className="ml-20 flex flex-col sm:flex-row">
+						<div className="font-bold text-lg sm:mr-4">{user?.name} 학생</div>
+						<div className="">{user?.school}</div>
+						<div className="sm:ml-4">{user?.grade}학년</div>
 					</div>
 					<div></div>
 					<button
