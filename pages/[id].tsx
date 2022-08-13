@@ -24,7 +24,7 @@ const AloneQuestion = ({
 	};
 
 	return (
-		<div className=" pl-20 pr-2 absolute h-full w-full  flex flex-col items-center ">
+		<div className="z-0 pl-20 pr-2 absolute h-full w-full  flex flex-col items-center ">
 			<div className="flex absolute top-28">
 				<div className="font-bold text-4xl">{statebtn?.index + 1} </div>
 				<div className="mt-auto">번 문제 </div>

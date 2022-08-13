@@ -48,12 +48,12 @@ const WarningModal = ({ handler }: WarningModalType) => {
 				<div className="flex justify-center">
 					<button
 						onClick={qnasubmitonClick}
-						className="hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+						className="hover:bg-white group hover:text-black hover:outline px-4 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
 					>
 						<div className="flex">
 							{state ? (
 								<svg
-									className="animate-spin -ml-1 mr-3 h-5 w-5 text-white group-hover:text-black"
+									className="animate-spin -ml-1 mr-3 h-5 w-5 text-white  group-hover:text-black"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
 									viewBox="0 0 24 24"
@@ -80,7 +80,7 @@ const WarningModal = ({ handler }: WarningModalType) => {
 					</button>
 					<button
 						onClick={handler}
-						className="hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+						className="hover:bg-white hover:text-black hover:outline px-2 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
 					>
 						아직! 확인 해볼게요
 					</button>

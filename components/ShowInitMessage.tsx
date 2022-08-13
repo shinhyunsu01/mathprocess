@@ -6,7 +6,7 @@ interface showType {
 }
 const ShowInitMessage = ({ handler, name }: showType) => {
 	return (
-		<div className="w-full absolute z-10 h-full bg-white  flex items-center justify-center flex-col">
+		<div className="w-full absolute z-50 h-full bg-white  flex items-center justify-center flex-col">
 			<div className=" p-4 bg-white rounded-2xl  border-2 flex items-center  flex-col justify-center">
 				<span className="font-bold">
 					{name}

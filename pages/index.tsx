@@ -132,24 +132,23 @@ const Home: NextPage = () => {
 				{dataMequestion?.mequestion?.show === false ? (
 					<ShowInitMessage handler={showonClick} name={user?.name + ""} />
 				) : (
-					""
-				)}
-				<div className="fixed w-full mt-8 h-10 flex items-center justify-between">
-					<div className="ml-20 flex flex-col sm:flex-row">
-						<div className="font-bold text-lg sm:mr-4">{user?.name} 학생</div>
-						<div className="">{user?.school}</div>
-						<div className="sm:ml-4">{user?.grade}학년</div>
+					<div className="fixed z-50 w-full mt-8 h-10 flex items-center justify-between">
+						<div className="ml-20 flex flex-col sm:flex-row">
+							<div className="font-bold text-lg sm:mr-4">{user?.name} 학생</div>
+							<div className="">{user?.school}</div>
+							<div className="sm:ml-4">{user?.grade}학년</div>
+						</div>
+						<div></div>
+						<button
+							onClick={submitOnclick}
+							className=" cursor-pointer hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+						>
+							제출
+						</button>
 					</div>
-					<div></div>
-					<button
-						onClick={submitOnclick}
-						className="hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
-					>
-						제출
-					</button>
-				</div>
+				)}
 
-				<div className="fixed pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
+				<div className="z-20 fixed pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
 					<div className="font-bold">문제 </div>
 					<br></br>
 					{totalQuestion?.map((data: any, i: number) => (

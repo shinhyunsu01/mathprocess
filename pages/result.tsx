@@ -53,7 +53,7 @@ const Result = () => {
 	return (
 		<>
 			<div className="w-full h-full ">
-				<div className=" fixed z-20 top-2 left-20 w-full flex items-center ">
+				<div className=" fixed  top-4 left-24 h-14 w-full flex items-center  whitespace-nowrap  scroll overflow-x-auto">
 					{data?.manyquestion?.map((e: any, i: any) => (
 						<button
 							key={i}
@@ -61,14 +61,14 @@ const Result = () => {
 							value={e}
 							className="flex flex-col shadow-lg shadow-slate-400 hover:text-black  hover:outline hover:bg-white bg-black rounded-2xl items-center text-white p-2 mr-5"
 						>
-							<div> 시험 종료 날짜</div>
-							<div className="text-blue-300 text-sm ">
-								{e.updatedAt.slice(0, 10)}
+							<div className="text-xs"> 시험 종료 날짜</div>
+							<div className="text-blue-300 text-xs">
+								{e.updatedAt?.slice(0, 10)}
 							</div>
 						</button>
 					))}
 				</div>
-				<div className="fixed pt-20  w-20 px-4 h-full bg-white border-r-2 border-slate-400">
+				<div className="fixed z-50 pt-20  w-20 px-4 h-full bg-white border-r-2 border-slate-400">
 					<div className="flex flex-col w-full  items-center">
 						<div className="font-bold  ">문제</div>
 						<br></br>
@@ -113,9 +113,15 @@ const Result = () => {
 
 export default Result;
 /*
-
-	<div className=" pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
-				<div className="font-bold">문제</div>
-				<br></br>
-			</div>
+	<button
+							key={i}
+							onClick={() => onClick(e, i)}
+							value={e}
+							className="flex flex-col shadow-lg shadow-slate-400 hover:text-black  hover:outline hover:bg-white bg-black rounded-2xl items-center text-white p-2 mr-5"
+						>
+							<div> 시험 종료 날짜</div>
+							<div className="text-blue-300 text-sm ">
+								{e.updatedAt.slice(0, 10)}
+							</div>
+						</button>
 */
