@@ -9,6 +9,7 @@ import ShowInitMessage from "../components/ShowInitMessage";
 import AloneQuestion from "./[id]";
 import WarningModal from "../components/WarningModal";
 import { useRouter } from "next/router";
+import Paint from "./Paint";
 
 interface totalQuestionType {
 	[key: string]: any;
@@ -27,6 +28,7 @@ const Home: NextPage = () => {
 	const [aloneQuestion, setaloneQuestion] = useState<number>(0);
 	const [selectQuestion, setselectQuestion] = useState([""]);
 	const [warningModal, setwarningModal] = useState(false);
+	const [stateMemo, setstateMemo] = useState(false);
 	const [select, setSelect] = useState({
 		selectNum: 0,
 		index: 0,
@@ -96,6 +98,9 @@ const Home: NextPage = () => {
 			solveFn({ selectNum: +e.target.value, index: select.index });
 		}
 	};
+	const memoOnclick = () => {
+		setstateMemo(true);
+	};
 
 	const onQuestionClick = (data: any, i: any) => {
 		setSelect({
@@ -138,15 +143,24 @@ const Home: NextPage = () => {
 							<div className="">{user?.school}</div>
 							<div className="sm:ml-4">{user?.grade}학년</div>
 						</div>
-						<div></div>
-						<button
-							onClick={submitOnclick}
-							className=" cursor-pointer hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
-						>
-							제출
-						</button>
+						<div>
+							<button
+								onClick={memoOnclick}
+								className=" cursor-pointer hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+							>
+								풀이
+							</button>
+
+							<button
+								onClick={submitOnclick}
+								className=" cursor-pointer hover:bg-white hover:text-black hover:outline px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+							>
+								제출
+							</button>
+						</div>
 					</div>
 				)}
+				{stateMemo ? <Paint /> : ""}
 
 				<div className="z-20 fixed pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
 					<div className="font-bold">문제 </div>

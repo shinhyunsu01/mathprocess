@@ -66,32 +66,29 @@ const Students = () => {
 				</div>
 
 				{data?.usersInfo?.map((e: any, i: number) => (
-					<div
-						key={i}
-						className="flex w-full items-center hover:bg-slate-300 rounded-lg cursor-pointer"
-					>
-						{modifyState ? (
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-5 w-5"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								strokeWidth="2"
-								onClick={() => editHandler(e)}
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M13 5l7 7-7 7M5 5l7 7-7 7"
-								/>
-							</svg>
-						) : (
-							""
-						)}
+					<Link href={`/admin/${e.id}`} key={i}>
+						<a>
+							<div className="flex w-full items-center hover:bg-slate-300 rounded-lg cursor-pointer">
+								{modifyState ? (
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-5 w-5"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth="2"
+										onClick={() => editHandler(e)}
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M13 5l7 7-7 7M5 5l7 7-7 7"
+										/>
+									</svg>
+								) : (
+									""
+								)}
 
-						<Link href={`/admin/${e.id}`}>
-							<a>
 								<div className="flex flex-col m-2 ">
 									<div className=" font-bold text-sm">{e.name}</div>
 									<div className=" font-normal text-sm text-slate-400">
@@ -101,19 +98,20 @@ const Students = () => {
 										{e.grade}학년
 									</div>
 								</div>
-							</a>
-						</Link>
-						<svg
-							xmlns="http://www.w3.org/2000/svg "
-							className={cls(
-								"w-5 h-5 ",
-								e.qnasubmit === false ? "fill-red-500" : "fill-green-500"
-							)}
-							viewBox="0 0 20 20"
-						>
-							<path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
-						</svg>
-					</div>
+
+								<svg
+									xmlns="http://www.w3.org/2000/svg "
+									className={cls(
+										"w-5 h-5 ",
+										e.qnasubmit === false ? "fill-red-500" : "fill-green-500"
+									)}
+									viewBox="0 0 20 20"
+								>
+									<path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+								</svg>
+							</div>
+						</a>
+					</Link>
 				))}
 			</div>
 			{addState ? (

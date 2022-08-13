@@ -210,7 +210,7 @@ const UserId = () => {
 							}}
 						/>
 					</div>
-					<div className="w-full font-bold text-lg">
+					<div className="w-full font-bold text-lg mb-4">
 						인증 번호
 						<span className="font-normal border-b-2 border-blue-300">
 							{"  "}
@@ -224,7 +224,7 @@ const UserId = () => {
 						)}
 					>
 						{data?.canQuestions && selectUser?.userInfo?.qnasubmit ? (
-							<div className="z-40 absolute w-full h-full bg-slate-300 opacity-80 flex items-center justify-center">
+							<div className="z-50 relative w-full h-60 bg-slate-300 opacity-80 flex items-center justify-center">
 								<div className="text-2xl font-bold">시험 중 입니다</div>
 							</div>
 						) : (
