@@ -4,7 +4,7 @@ import Students from "../../components/Students";
 import dynamic from "next/dynamic";
 import useUser from "../../libs/client/useUser";
 import useMutation from "../../libs/client/useMutation";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { cls } from "../../libs/client/utils";
@@ -106,6 +106,7 @@ const UserId = () => {
 	useEffect(() => {
 		if (makedata?.ok === true) {
 			setsutmitLoading(false);
+			router.reload();
 		}
 	}, [makedata]);
 

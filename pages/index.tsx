@@ -150,7 +150,7 @@ const Home: NextPage = () => {
 					</button>
 				</div>
 
-				<div className="absolute pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
+				<div className="fixed pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
 					<div className="font-bold">문제 </div>
 					<br></br>
 					{totalQuestion?.map((data: any, i: number) => (

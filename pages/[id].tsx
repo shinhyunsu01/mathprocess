@@ -24,7 +24,7 @@ const AloneQuestion = ({
 	};
 
 	return (
-		<div className="pl-20 mx-auto w-full h-full  flex flex-col items-center justify-center">
+		<div className="pl-20 absolute mx-auto w-full h-full  flex flex-col items-center justify-center">
 			<div className="flex">
 				<div className="font-bold text-4xl">{statebtn?.index + 1} </div>
 				<div className="mt-auto">번 문제 </div>
@@ -32,7 +32,7 @@ const AloneQuestion = ({
 
 			<br></br>
 
-			<div className="bg-black rounded-2xl w-48 h-48 relative">
+			<div className=" rounded-2xl mr-4 w-full h-full relative">
 				<Image
 					objectFit="contain"
 					layout="fill"
@@ -40,7 +40,7 @@ const AloneQuestion = ({
 				/>
 			</div>
 
-			<div className="mt-5 flex ">
+			<div className="absolute flex -mb-[1000px]">
 				{[1, 2, 3, 4, 5].map((date, i) => (
 					<button
 						key={i}
