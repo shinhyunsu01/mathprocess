@@ -160,7 +160,6 @@ const Home: NextPage = () => {
 						</div>
 					</div>
 				)}
-				{stateMemo ? <Paint /> : ""}
 
 				<div className="z-20 fixed pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
 					<div className="font-bold">문제 </div>
