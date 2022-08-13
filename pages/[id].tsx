@@ -24,23 +24,22 @@ const AloneQuestion = ({
 	};
 
 	return (
-		<div className="pl-20 absolute mx-auto w-full h-full  flex flex-col items-center justify-center">
-			<div className="flex">
+		<div className=" pl-20 pr-2 absolute h-full w-full  flex flex-col items-center ">
+			<div className="flex absolute top-20">
 				<div className="font-bold text-4xl">{statebtn?.index + 1} </div>
 				<div className="mt-auto">번 문제 </div>
 			</div>
 
 			<br></br>
 
-			<div className=" rounded-2xl mr-4 w-full h-full relative">
+			<div className="relative   w-full h-full ">
 				<Image
 					objectFit="contain"
 					layout="fill"
 					src={`https://imagedelivery.net/fhkogDoSTeLvyDALpsIbnw/${data?.alonequestion?.avatar}/public`}
 				/>
 			</div>
-
-			<div className="absolute flex -mb-[1000px]">
+			<div className="absolute flex bottom-20">
 				{[1, 2, 3, 4, 5].map((date, i) => (
 					<button
 						key={i}
@@ -48,7 +47,7 @@ const AloneQuestion = ({
 						disabled={disabled}
 						onClick={onClick}
 						className={cls(
-							" w-9 h-9 rounded-lg flex  items-center justify-center  ",
+							"sm:mx-2 mx-1 w-8 h-8 sm:w-9 sm:h-9 lg:w-12 lg:h-12 lg:mx-4 rounded-lg flex  items-center justify-center  ",
 							statebtn?.selectNum === i + 1
 								? "bg-slate-900 font-semibold text-white"
 								: "bg-white text-slate-700"
