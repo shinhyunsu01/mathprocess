@@ -319,7 +319,7 @@ const Paint = ({ handler, imgdata, statePaint, settstatePaint }: PaintType) => {
 						className="mx-4 mt-4 sm:mt-0"
 					/>
 				</div>
-				<div className="flex">
+				<div className="flex items-center">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="cursor-pointer h-5 w-5 mx-4"
