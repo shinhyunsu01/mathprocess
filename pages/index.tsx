@@ -9,7 +9,11 @@ import ShowInitMessage from "../components/ShowInitMessage";
 import AloneQuestion from "./[id]";
 import WarningModal from "../components/WarningModal";
 import { useRouter } from "next/router";
-import Paint from "./Paint";
+
+import dynamic from "next/dynamic";
+const Paint = dynamic(() => import("../components/Paint"), {
+	ssr: false,
+});
 
 interface totalQuestionType {
 	[key: string]: any;
