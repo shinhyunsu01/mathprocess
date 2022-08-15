@@ -29,6 +29,10 @@ const Home: NextPage = () => {
 	const [selectQuestion, setselectQuestion] = useState([""]);
 	const [warningModal, setwarningModal] = useState(false);
 	const [stateMemo, setstateMemo] = useState(false);
+	const [statePaint, settstatePaint] = useState(true);
+
+	const [imgarr, setimgArr] = useState<any>([]);
+
 	const [select, setSelect] = useState({
 		selectNum: 0,
 		index: 0,
@@ -100,6 +104,7 @@ const Home: NextPage = () => {
 	};
 	const memoOnclick = () => {
 		setstateMemo(!stateMemo);
+		settstatePaint(true);
 	};
 
 	const onQuestionClick = (data: any, i: any) => {
@@ -131,6 +136,7 @@ const Home: NextPage = () => {
 				)}
 
 	*/
+	//console.log("dddddd");
 	return (
 		<>
 			<div className="w-full h-full">
@@ -160,7 +166,16 @@ const Home: NextPage = () => {
 						</div>
 					</div>
 				)}
-				{stateMemo ? <Paint /> : ""}
+				{stateMemo ? (
+					<Paint
+						handler={setimgArr}
+						imgdata={imgarr}
+						statePaint={statePaint}
+						settstatePaint={settstatePaint}
+					/>
+				) : (
+					""
+				)}
 
 				<div className="z-20 fixed pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
 					<div className="font-bold">문제 </div>
