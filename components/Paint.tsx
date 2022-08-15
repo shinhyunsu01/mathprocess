@@ -286,7 +286,7 @@ const Paint = ({ handler, imgdata, statePaint, settstatePaint }: PaintType) => {
 
 	return (
 		<div className="relative  right top-20">
-			<div className="absolute    sm:right-2  z-20 px-2 flex items-center">
+			<div className="absolute  top-2 right-0 sm:right-2  z-20 px-2 flex items-center flex-col-reverse sm:flex-row">
 				<div className="flex items-center flex-col sm:flex-row ">
 					<div className="flex items-center mt-2">
 						<button
@@ -319,41 +319,42 @@ const Paint = ({ handler, imgdata, statePaint, settstatePaint }: PaintType) => {
 						className="mx-4 mt-4 sm:mt-0"
 					/>
 				</div>
+				<div className="flex">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="cursor-pointer h-5 w-5 mx-4"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						onClick={onUndo}
+					>
+						<path
+							fillRule="evenodd"
+							d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+							clipRule="evenodd"
+						/>
+					</svg>
 
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					className="cursor-pointer h-5 w-5 mx-4"
-					viewBox="0 0 20 20"
-					fill="currentColor"
-					onClick={onUndo}
-				>
-					<path
-						fillRule="evenodd"
-						d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-						clipRule="evenodd"
-					/>
-				</svg>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="cursor-pointer  h-5 w-5 mx-4"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						onClick={onClear}
+					>
+						<path
+							fillRule="evenodd"
+							d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+							clipRule="evenodd"
+						/>
+					</svg>
 
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					className="cursor-pointer  h-5 w-5 mx-4"
-					viewBox="0 0 20 20"
-					fill="currentColor"
-					onClick={onClear}
-				>
-					<path
-						fillRule="evenodd"
-						d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-						clipRule="evenodd"
-					/>
-				</svg>
-
-				<button
-					onClick={onSaveClick}
-					className="px-4 py-2 bg-black text-white rounded-2xl ml-2"
-				>
-					저장
-				</button>
+					<button
+						onClick={onSaveClick}
+						className="px-4 py-2 bg-black text-white rounded-2xl ml-2"
+					>
+						저장
+					</button>
+				</div>
 			</div>
 
 			<canvas
