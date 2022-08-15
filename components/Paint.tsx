@@ -286,35 +286,39 @@ const Paint = ({ handler, imgdata, statePaint, settstatePaint }: PaintType) => {
 
 	return (
 		<div className="relative  right top-20">
-			<div className="absolute  top-4 right-14  z-20 px-2 flex items-center">
-				<button
-					className="  mx-1 rounded-full w-5 h-5 bg-blue-500"
-					id="blue"
-					onClick={onColorClick}
-				></button>
-				<button
-					className="  mx-1 rounded-full w-5 h-5 bg-white border border-black"
-					id="white"
-					onClick={onColorClick}
-				></button>
-				<button
-					className="  mx-1 rounded-full w-5 h-5 bg-green-500"
-					id="green"
-					onClick={onColorClick}
-				></button>
-				<button
-					className="  mx-1 rounded-full w-5 h-5 bg-black"
-					id="black"
-					onClick={onColorClick}
-				></button>
-				<input
-					onChange={onWidthClick}
-					type="range"
-					min="1"
-					max="101"
-					step="5"
-					className="mx-4"
-				/>
+			<div className="absolute    sm:right-2  z-20 px-2 flex items-center">
+				<div className="flex items-center flex-col sm:flex-row ">
+					<div className="flex items-center mt-2">
+						<button
+							className="  mx-1 rounded-full w-5 h-5 bg-blue-500"
+							id="blue"
+							onClick={onColorClick}
+						></button>
+						<button
+							className="  mx-1 rounded-full w-5 h-5 bg-white border border-black"
+							id="white"
+							onClick={onColorClick}
+						></button>
+						<button
+							className="  mx-1 rounded-full w-5 h-5 bg-green-500"
+							id="green"
+							onClick={onColorClick}
+						></button>
+						<button
+							className="  mx-1 rounded-full w-5 h-5 bg-black"
+							id="black"
+							onClick={onColorClick}
+						></button>
+					</div>
+					<input
+						onChange={onWidthClick}
+						type="range"
+						min="1"
+						max="101"
+						step="5"
+						className="mx-4 mt-4 sm:mt-0"
+					/>
+				</div>
 
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -346,7 +350,7 @@ const Paint = ({ handler, imgdata, statePaint, settstatePaint }: PaintType) => {
 
 				<button
 					onClick={onSaveClick}
-					className="px-4 py-2 bg-black text-white rounded-2xl ml-20"
+					className="px-4 py-2 bg-black text-white rounded-2xl ml-2"
 				>
 					저장
 				</button>

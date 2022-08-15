@@ -148,7 +148,7 @@ const Home: NextPage = () => {
 					<ShowInitMessage handler={showonClick} name={user?.name + ""} />
 				) : (
 					<div className="fixed z-50 w-full mt-8 h-10 flex items-center justify-between">
-						<div className="ml-20 flex flex-col sm:flex-row">
+						<div className="ml-16 flex flex-col sm:flex-row">
 							<div className="font-bold text-lg sm:mr-4">{user?.name} 학생</div>
 							<div className="">{user?.school}</div>
 							<div className="sm:ml-4">{user?.grade}학년</div>
@@ -156,14 +156,14 @@ const Home: NextPage = () => {
 						<div>
 							<button
 								onClick={memoOnclick}
-								className=" cursor-pointer hover:bg-white hover:text-black border-2  border-transparent hover:border-2 hover:border-black    px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+								className=" cursor-pointer hover:bg-white hover:text-black border-2  border-transparent hover:border-2 hover:border-black    px-2 py-2 mr-2 sm:px-4 bg-black text-white rounded-2xl ml-auto text-center"
 							>
 								풀이
 							</button>
 
 							<button
 								onClick={submitOnclick}
-								className=" cursor-pointer hover:bg-white hover:text-black border-2  border-transparent hover:border-2 hover:border-black  px-6 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+								className=" cursor-pointer hover:bg-white hover:text-black border-2  border-transparent hover:border-2 hover:border-black  px-2 py-2 mr-2 sm:px-4 bg-black text-white rounded-2xl ml-auto text-center"
 							>
 								제출
 							</button>
