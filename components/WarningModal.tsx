@@ -48,7 +48,7 @@ const WarningModal = ({ handler }: WarningModalType) => {
 				<div className="flex justify-center">
 					<button
 						onClick={qnasubmitonClick}
-						className="hover:bg-white group hover:text-black hover:outline px-4 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+						className="hover:bg-white group e hover:text-black border-2  border-transparent hover:border-2 hover:border-black  px-4 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
 					>
 						<div className="flex">
 							{state ? (
@@ -80,7 +80,7 @@ const WarningModal = ({ handler }: WarningModalType) => {
 					</button>
 					<button
 						onClick={handler}
-						className="hover:bg-white hover:text-black hover:outline px-2 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
+						className="hover:bg-white e hover:text-black border-2  border-transparent hover:border-2 hover:border-black  px-2 py-2 mr-2 bg-black text-white rounded-2xl ml-auto text-center"
 					>
 						아직! 확인 해볼게요
 					</button>

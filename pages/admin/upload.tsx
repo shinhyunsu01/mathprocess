@@ -171,7 +171,7 @@ const Upload = () => {
 						{errors.minititle?.message}
 					</div>
 				</div>
-				<button className=" hover:outline hover:text-black hover:bg-white py-2 px-12 m-2 bg-black text-white rounded-full mt-6">
+				<button className="hover:text-black border-2  border-transparent hover:border-2 hover:border-black hover:bg-white py-2 px-12 m-2 bg-black text-white rounded-full mt-6">
 					Upload
 				</button>
 				{okdb ? <div className="text-black">{okdb}</div> : ""}

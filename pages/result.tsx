@@ -59,7 +59,7 @@ const Result = () => {
 							key={i}
 							onClick={() => onClick(e, i)}
 							value={e}
-							className="flex flex-col shadow-lg shadow-slate-400 hover:text-black  hover:outline hover:bg-white bg-black rounded-2xl items-center text-white p-2 mr-5"
+							className="flex flex-col shadow-lg shadow-slate-400  hover:text-black border-2  border-transparent hover:border-2 hover:border-black  hover:bg-white bg-black rounded-2xl items-center text-white p-2 mr-5"
 						>
 							<div className="text-xs"> 시험 종료 날짜</div>
 							<div className="text-blue-300 text-xs">
