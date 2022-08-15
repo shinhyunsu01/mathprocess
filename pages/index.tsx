@@ -99,7 +99,7 @@ const Home: NextPage = () => {
 		}
 	};
 	const memoOnclick = () => {
-		setstateMemo(true);
+		setstateMemo(!stateMemo);
 	};
 
 	const onQuestionClick = (data: any, i: any) => {

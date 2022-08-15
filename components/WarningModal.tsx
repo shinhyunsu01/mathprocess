@@ -40,7 +40,7 @@ const WarningModal = ({ handler }: WarningModalType) => {
 					/>
 				</svg>
 				<div className="flex flex-col items-center justify-center">
-					<div className="font-bold text-xl">안 푼 문제가 있습니다 </div>
+					<div className="z-20 font-bold text-xl">안 푼 문제가 있습니다 </div>
 					<div className="text-lg">제출 할까요? 🤔</div>
 				</div>
 				<br></br>

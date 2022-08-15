@@ -148,7 +148,7 @@ const Paint = () => {
 
 	return (
 		<div className="relative  right-0 ">
-			<div className="absolute  top-24 right-60  z-50 ">
+			<div className="absolute  top-24 right-60  z-20 ">
 				<button
 					className="  mx-1 rounded-full w-5 h-5 bg-blue-500"
 					id="blue"
@@ -189,7 +189,7 @@ const Paint = () => {
 				ref={canvasRef}
 				width="600"
 				height="600"
-				className="absolute right-0 top-20 z-40 rounded-xl outline bg-white mr-2 "
+				className="absolute right-0 top-20 z-10 rounded-xl outline bg-white mr-2 "
 			/>
 		</div>
 	);
