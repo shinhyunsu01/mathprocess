@@ -83,7 +83,7 @@ async function handler(
 				finduser
 			) {
 				console.log("first");
-				let allscore = "";
+				//let allscore = "";
 				let score = finduser.score?.split(",");
 				let answer = questionfind.answer?.split(",");
 				let select = questionfind.selectQuestion.split(",");
@@ -105,7 +105,7 @@ async function handler(
 					})
 				);
 				console.log("second");
-				score?.map((data, i) => {
+				const allscore = score?.map((data, i) => {
 					let my = data.split("_");
 					let kind = my[0];
 					let grade = Number(my[1]);
@@ -123,10 +123,13 @@ async function handler(
 							}
 						}
 					});
-					allscore += kind + "_" + grade + ",";
+
+					return  kind + "_" + grade + ",";
+					//allscore += kind + "_" + grade + ",";
 					//console.log("allscore", allscore);
 				});
-				if (allscore !== "") {
+				console.log("fifth",allscore?.toString);
+				/*if (allscore !== "") {
 					allscore = allscore.slice(0, -1);
 
 					console.log("allscore", allscore);
@@ -149,7 +152,7 @@ async function handler(
 						data: {
 							qnasubmit: true,
 						},
-					});
+					});*/
 					res.json({
 						ok: true,
 						mequestion,
