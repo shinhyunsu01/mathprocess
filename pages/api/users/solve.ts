@@ -124,32 +124,31 @@ async function handler(
 				allscore = allscore.slice(0, -1);
 
 				console.log("allscore", allscore);
-				if (allscore !== "") {
-					console.log("score", allscore);
-					await client.user.update({
-						where: {
-							id: Number(user?.id),
-						},
-						data: {
-							score: allscore,
-							qnasubmit: false,
-						},
-					});
-					console.log("qnasubmit", qnasubmit);
-					mequestion = await client.questions.update({
-						where: {
-							id: questionfind?.id,
-						},
-						data: {
-							qnasubmit: true,
-						},
-					});
 
-					res.json({
+				console.log("score", allscore);
+				await client.user.update({
+					where: {
+						id: Number(user?.id),
+					},
+					data: {
+						score: allscore,
+						qnasubmit: false,
+					},
+				});
+				console.log("qnasubmit", qnasubmit);
+				mequestion = await client.questions.update({
+					where: {
+						id: questionfind?.id,
+					},
+					data: {
+						qnasubmit: true,
+					},
+				});
+
+				/*res.json({
 						ok: true,
 						mequestion,
-					});
-				}
+					});*/
 			}
 		}
 	}
