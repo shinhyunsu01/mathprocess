@@ -42,6 +42,10 @@ async function handler(
 					show: true,
 				},
 			});
+			res.json({
+				ok: true,
+				mequestion,
+			});
 		}
 		if (selectNum !== null && index != null) {
 			if (questionfind?.selectQuestion) {
@@ -55,6 +59,9 @@ async function handler(
 					data: { selectQuestion: arr.toString() },
 				});
 			}
+			res.json({
+				ok: true,
+			});
 		}
 		if (qnasubmit) {
 			let allscore = "";
@@ -63,6 +70,7 @@ async function handler(
 					id: Number(user?.id),
 				},
 			});
+			console.log("finduser", finduser);
 			if (
 				questionfind?.answer &&
 				questionfind.selectQuestion &&
@@ -130,13 +138,12 @@ async function handler(
 					qnasubmit,
 				},
 			});
+			res.json({
+				ok: true,
+				mequestion,
+			});
 		}
 	}
-	console.log("resut", mequestion);
-	res.json({
-		ok: true,
-		mequestion,
-	});
 }
 
 export default withApiSession(
