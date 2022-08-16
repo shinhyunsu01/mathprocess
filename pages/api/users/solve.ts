@@ -24,6 +24,10 @@ async function handler(
 			},
 		});
 		console.log("getmequestion", mequestion);
+		res.json({
+			ok: true,
+			mequestion,
+		});
 	}
 	if (req.method === "POST") {
 		let questionfind = await client.questions.findFirst({
