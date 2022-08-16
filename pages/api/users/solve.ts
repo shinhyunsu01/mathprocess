@@ -70,7 +70,6 @@ async function handler(
 		}
 
 		if (qnasubmit === true) {
-			let allscore = "";
 			const finduser = await client.user.findUnique({
 				where: {
 					id: Number(user?.id),
@@ -84,6 +83,7 @@ async function handler(
 				finduser
 			) {
 				console.log("first");
+				let allscore = "";
 				let score = finduser.score?.split(",");
 				let answer = questionfind.answer?.split(",");
 				let select = questionfind.selectQuestion.split(",");
