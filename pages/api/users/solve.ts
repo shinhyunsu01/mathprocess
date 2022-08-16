@@ -124,7 +124,7 @@ async function handler(
 						});
 						allscore += kind + "_" + grade + ",";
 					}),
-				]).then(async ()=>{
+				]).then(async () => {
 					allscore = allscore.slice(0, -1);
 					await client.user.update({
 						where: {
@@ -151,7 +151,7 @@ async function handler(
 						ok: true,
 						mequestion,
 					});
-				});/*
+				}); /*
 				allscore = allscore.slice(0, -1);
 				console.log("before thired");
 				if (allscore) {
@@ -180,7 +180,6 @@ async function handler(
 						ok: true,
 						mequestion,
 					});*/
-				}
 			}
 		}
 	}
