@@ -68,6 +68,7 @@ async function handler(
 				str += `${e}_3,`;
 			});
 			str = str.slice(0, -1);
+			console.log(str);
 			await client.user.update({
 				where: {
 					id: Number(req.query.id),
