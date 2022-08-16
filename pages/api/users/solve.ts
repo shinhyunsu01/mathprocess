@@ -105,31 +105,32 @@ async function handler(
 					})
 				);
 				console.log("second");
-				const allscore = score?.map((data, i) => {
-					let my = data.split("_");
-					let kind = my[0];
-					let grade = Number(my[1]);
+				if (score) {
+					const allscore = score?.map((data, i) => {
+						let my = data.split("_");
+						let kind = my[0];
+						let grade = Number(my[1]);
 
-					const filter: any = allquestion.filter(
-						(data: any) => data.kind === kind
-					);
+						const filter: any = allquestion.filter(
+							(data: any) => data.kind === kind
+						);
 
-					question.map((ee, ii) => {
-						if (Number(ee) === filter[0].id) {
-							if (select[ii] !== answer[ii]) {
-								grade = grade - 1;
-							} else {
-								grade = grade + 1;
+						question.map((ee, ii) => {
+							if (Number(ee) === filter[0].id) {
+								if (select[ii] !== answer[ii]) {
+									grade = grade - 1;
+								} else {
+									grade = grade + 1;
+								}
 							}
-						}
-					});
+						});
 
-					return kind + "_" + grade + ",";
-					//allscore += kind + "_" + grade + ",";
-					//console.log("allscore", allscore);
-				});
-				console.log("fifth", allscore?.toString);
-				/*if (allscore !== "") {
+						return kind + "_" + grade + ",";
+						//allscore += kind + "_" + grade + ",";
+						//console.log("allscore", allscore);
+					});
+					console.log("fifth", allscore);
+					/*if (allscore !== "") {
 					allscore = allscore.slice(0, -1);
 
 					console.log("allscore", allscore);
@@ -153,10 +154,11 @@ async function handler(
 							qnasubmit: true,
 						},
 					});*/
-				res.json({
-					ok: true,
-					mequestion,
-				});
+					res.json({
+						ok: true,
+						mequestion,
+					});
+				}
 			}
 		}
 	}
