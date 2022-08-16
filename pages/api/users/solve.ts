@@ -124,31 +124,31 @@ async function handler(
 					allscore += kind + "_" + grade + ",";
 				});
 				allscore = allscore.slice(0, -1);
+
+				await client.user.update({
+					where: {
+						id: Number(finduser?.id),
+					},
+					data: {
+						score: allscore.toString(),
+						qnasubmit: false,
+					},
+				});
+
+				mequestion = await client.questions.update({
+					where: {
+						id: questionfind?.id,
+					},
+					data: {
+						qnasubmit,
+					},
+				});
+
+				res.json({
+					ok: true,
+					mequestion,
+				});
 			}
-			console.log("testt thired before", finduser?.id, allscore);
-			await client.user.update({
-				where: {
-					id: Number(finduser?.id),
-				},
-				data: {
-					score: allscore.toString(),
-					qnasubmit: false,
-				},
-			});
-			console.log("thired");
-			mequestion = await client.questions.update({
-				where: {
-					id: questionfind?.id,
-				},
-				data: {
-					qnasubmit,
-				},
-			});
-			console.log("fourth");
-			res.json({
-				ok: true,
-				mequestion,
-			});
 		}
 	}
 }
