@@ -123,6 +123,7 @@ async function handler(
 				});
 				allscore = allscore.slice(0, -1);
 			}
+			console.log("allscore", allscore);
 			if (allscore !== "") {
 				console.log("score", allscore);
 				await client.user.update({
