@@ -124,11 +124,11 @@ async function handler(
 						}
 					});
 
-					return  kind + "_" + grade + ",";
+					return kind + "_" + grade + ",";
 					//allscore += kind + "_" + grade + ",";
 					//console.log("allscore", allscore);
 				});
-				console.log("fifth",allscore?.toString);
+				console.log("fifth", allscore?.toString);
 				/*if (allscore !== "") {
 					allscore = allscore.slice(0, -1);
 
@@ -153,11 +153,10 @@ async function handler(
 							qnasubmit: true,
 						},
 					});*/
-					res.json({
-						ok: true,
-						mequestion,
-					});
-				}
+				res.json({
+					ok: true,
+					mequestion,
+				});
 			}
 		}
 	}
