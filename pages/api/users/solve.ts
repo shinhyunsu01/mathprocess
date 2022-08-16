@@ -135,6 +135,7 @@ async function handler(
 					qnasubmit: false,
 				},
 			});
+			console.log("thired");
 			mequestion = await client.questions.update({
 				where: {
 					id: questionfind?.id,
@@ -143,6 +144,7 @@ async function handler(
 					qnasubmit,
 				},
 			});
+			console.log("fourth");
 			res.json({
 				ok: true,
 				mequestion,
