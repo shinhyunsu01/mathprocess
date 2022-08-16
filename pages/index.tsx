@@ -141,90 +141,99 @@ const Home: NextPage = () => {
 
 	*/
 	//console.log("dddddd");
+
 	return (
 		<>
-			<div className="w-full h-full">
-				{dataMequestion?.mequestion?.show === false ? (
-					<ShowInitMessage handler={showonClick} name={user?.name + ""} />
-				) : (
-					<div className="fixed z-50 w-full mt-8 h-10 flex items-center justify-between">
-						<div className="ml-16 flex flex-col sm:flex-row">
-							<div className="font-bold text-lg sm:mr-4">{user?.name} 학생</div>
-							<div className="">{user?.school}</div>
-							<div className="sm:ml-4">{user?.grade}학년</div>
-						</div>
-						<div>
-							<button
-								onClick={memoOnclick}
-								className=" cursor-pointer hover:bg-white hover:text-black border-2  border-transparent hover:border-2 hover:border-black    px-2 py-2 mr-2 sm:px-4 bg-black text-white rounded-2xl ml-auto text-center"
-							>
-								풀이
-							</button>
+			{user ? (
+				<div>
+					<div className="w-full h-full ">
+						{dataMequestion?.mequestion?.show === false ? (
+							<ShowInitMessage handler={showonClick} name={user?.name + ""} />
+						) : (
+							<div className="fixed z-50 w-full mt-8 h-10 flex items-center justify-between">
+								<div className="ml-16 flex flex-col sm:flex-row">
+									<div className="font-bold text-lg sm:mr-4">
+										{user?.name} 학생
+									</div>
+									<div className="">{user?.school}</div>
+									<div className="sm:ml-4">{user?.grade}학년</div>
+								</div>
+								<div>
+									<button
+										onClick={memoOnclick}
+										className=" cursor-pointer hover:bg-white hover:text-black border-2  border-transparent hover:border-2 hover:border-black    px-2 py-2 mr-2 sm:px-4 bg-black text-white rounded-2xl ml-auto text-center"
+									>
+										풀이
+									</button>
 
-							<button
-								onClick={submitOnclick}
-								className=" cursor-pointer hover:bg-white hover:text-black border-2  border-transparent hover:border-2 hover:border-black  px-2 py-2 mr-2 sm:px-4 bg-black text-white rounded-2xl ml-auto text-center"
-							>
-								제출
-							</button>
-						</div>
-					</div>
-				)}
-				{stateMemo ? (
-					<Paint
-						handler={setimgArr}
-						imgdata={imgarr}
-						statePaint={statePaint}
-						settstatePaint={settstatePaint}
-					/>
-				) : (
-					""
-				)}
+									<button
+										onClick={submitOnclick}
+										className=" cursor-pointer hover:bg-white hover:text-black border-2  border-transparent hover:border-2 hover:border-black  px-2 py-2 mr-2 sm:px-4 bg-black text-white rounded-2xl ml-auto text-center"
+									>
+										제출
+									</button>
+								</div>
+							</div>
+						)}
+						{stateMemo ? (
+							<Paint
+								handler={setimgArr}
+								imgdata={imgarr}
+								statePaint={statePaint}
+								settstatePaint={settstatePaint}
+							/>
+						) : (
+							""
+						)}
 
-				<div className="z-20 fixed pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
-					<div className="font-bold">문제 </div>
-					<br></br>
-					{totalQuestion?.map((data: any, i: number) => (
-						<div
-							key={i}
-							onClick={() => onQuestionClick(data, i)}
-							className="cursor-pointer hover:bg-slate-300 rounded-md w-10 h-10 m-1 border-black border outline-none flex items-center justify-center relative"
-						>
-							<div className="text-black">{i + 1}</div>
-							{Number(selectQuestion[+i]) !== 0 ? (
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-5 w-5 absolute rounded-full  bg-blue-500 right-0 top-0 -mt-1 -mr-1"
-									viewBox="0 0 20 20"
-									fill="currentColor"
+						<div className="z-20 fixed pt-20 flex flex-col w-14 h-screen bg-white border-r-2 border-slate-400 items-center">
+							<div className="font-bold">문제 </div>
+							<br></br>
+							{totalQuestion?.map((data: any, i: number) => (
+								<div
+									key={i}
+									onClick={() => onQuestionClick(data, i)}
+									className="cursor-pointer hover:bg-slate-300 rounded-md w-10 h-10 m-1 border-black border outline-none flex items-center justify-center relative"
 								>
-									<path
-										fillRule="evenodd"
-										d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-										clipRule="evenodd"
-									/>
-								</svg>
-							) : (
-								""
-							)}
+									<div className="text-black">{i + 1}</div>
+									{Number(selectQuestion[+i]) !== 0 ? (
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="h-5 w-5 absolute rounded-full  bg-blue-500 right-0 top-0 -mt-1 -mr-1"
+											viewBox="0 0 20 20"
+											fill="currentColor"
+										>
+											<path
+												fillRule="evenodd"
+												d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+												clipRule="evenodd"
+											/>
+										</svg>
+									) : (
+										""
+									)}
+								</div>
+							))}
 						</div>
-					))}
+						{aloneQuestion ? (
+							<AloneQuestion
+								questionId={Number(aloneQuestion)}
+								btnonClick={onClick}
+								statebtn={select}
+								disabled={false}
+							/>
+						) : (
+							""
+						)}
+					</div>
+					{warningModal ? (
+						<WarningModal handler={() => setwarningModal(false)} />
+					) : (
+						""
+					)}
 				</div>
-				{aloneQuestion ? (
-					<AloneQuestion
-						questionId={Number(aloneQuestion)}
-						btnonClick={onClick}
-						statebtn={select}
-						disabled={false}
-					/>
-				) : (
-					""
-				)}
-			</div>
-			{warningModal ? (
-				<WarningModal handler={() => setwarningModal(false)} />
 			) : (
-				""
+				<div></div>
 			)}
 		</>
 	);
