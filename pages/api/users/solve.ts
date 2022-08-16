@@ -128,7 +128,7 @@ async function handler(
 				
 					await client.user.update({
 						where: {
-							id: finduser.id,
+							id: Number(finduser.id),
 						},
 						data: {
 							score: allscore.toString(),
