@@ -135,8 +135,7 @@ async function handler(
 						allscore += kind + "_" + grade + ",";
 						//console.log("allscore", allscore);
 					});
-					
-					if (allscore !== "") {
+
 					allscore = allscore.slice(0, -1);
 
 					console.log("allscore", allscore);
