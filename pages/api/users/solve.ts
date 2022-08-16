@@ -147,10 +147,10 @@ async function handler(
 					},
 				});
 
-				/*res.json({
-						ok: true,
-						mequestion,
-					});*/
+				res.json({
+					ok: true,
+					mequestion,
+				});
 			}
 		}
 	}
