@@ -103,26 +103,28 @@ async function handler(
 				);
 				console.log("second", allquestion);
 
-				score?.map(async (data, i) => {
-					let my = data.split("_");
-					let kind = my[0];
-					let grade = Number(my[1]);
+				await Promise.all([
+					score?.map(async (data, i) => {
+						let my = data.split("_");
+						let kind = my[0];
+						let grade = Number(my[1]);
 
-					const filter: any = allquestion.filter(
-						(data: any) => data.kind === kind
-					);
+						const filter: any = allquestion.filter(
+							(data: any) => data.kind === kind
+						);
 
-					question.map((ee, ii) => {
-						if (Number(ee) === filter[0].id) {
-							if (select[ii] !== answer[ii]) {
-								grade = grade - 1;
-							} else {
-								grade = grade + 1;
+						question.map((ee, ii) => {
+							if (Number(ee) === filter[0].id) {
+								if (select[ii] !== answer[ii]) {
+									grade = grade - 1;
+								} else {
+									grade = grade + 1;
+								}
 							}
-						}
-					});
-					allscore += kind + "_" + grade + ",";
-				});
+						});
+						allscore += kind + "_" + grade + ",";
+					}),
+				]);
 				allscore = allscore.slice(0, -1);
 				console.log("before thired");
 				if (allscore) {
@@ -135,24 +137,23 @@ async function handler(
 							qnasubmit: false,
 						},
 					});
+					//score: allscore.toString(),
+					console.log("affter thired");
+					mequestion = client.questions.update({
+						where: {
+							id: questionfind?.id,
+						},
+						data: {
+							qnasubmit,
+						},
+					});
+					console.log("affter fourth");
+
+					res.json({
+						ok: true,
+						mequestion,
+					});
 				}
-
-				//score: allscore.toString(),
-				console.log("affter thired");
-				mequestion = client.questions.update({
-					where: {
-						id: questionfind?.id,
-					},
-					data: {
-						qnasubmit,
-					},
-				});
-				console.log("affter fourth");
-
-				res.json({
-					ok: true,
-					mequestion,
-				});
 			}
 		}
 	}
