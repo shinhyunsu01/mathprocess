@@ -137,7 +137,7 @@ async function handler(
 				//score: allscore.toString(),
 
 				console.log("affter thired");
-
+				/*
 				mequestion = await client.questions.update({
 					where: {
 						id: questionfind?.id,
@@ -147,7 +147,7 @@ async function handler(
 					},
 				});
 				console.log("affter fourth");
-
+*/
 				res.json({
 					ok: true,
 					mequestion,
