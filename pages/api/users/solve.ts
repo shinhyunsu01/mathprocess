@@ -125,10 +125,10 @@ async function handler(
 				});
 				allscore = allscore.slice(0, -1);
 				console.log("beefore thired");
-				if (finduser?.id) {
+				
 					await client.user.update({
 						where: {
-							id: Number(finduser.id),
+							id: finduser.id,
 						},
 						data: {
 							score: allscore.toString(),
