@@ -109,7 +109,7 @@ async function handler(
 					let my = data.split("_");
 					let kind = my[0];
 					let grade = Number(my[1]);
-
+					console.log("filter", allquestion);
 					const filter: any = allquestion.filter(
 						(data: any) => data.kind === kind
 					);
