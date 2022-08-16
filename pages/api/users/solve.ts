@@ -30,6 +30,7 @@ async function handler(
 		});
 	}
 	if (req.method === "POST") {
+		console.log("req", req.body);
 		let questionfind = await client.questions.findFirst({
 			where: {
 				userId: Number(user?.id),
@@ -67,7 +68,7 @@ async function handler(
 				ok: true,
 			});
 		}
-		console.log("req", req.body);
+
 		if (qnasubmit) {
 			let allscore = "";
 			const finduser = await client.user.findUnique({
