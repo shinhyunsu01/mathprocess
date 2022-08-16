@@ -117,17 +117,17 @@ async function handler(
 							(data: any) => data.kind === kind
 						);
 						console.log("uu", filter[0], question);
-						if (filter !== undefined) {
-							question?.map((ee, ii) => {
-								if (Number(ee) === filter[0].id) {
-									if (select[ii] !== answer[ii]) {
-										grade = grade - 1;
-									} else {
-										grade = grade + 1;
-									}
+						//if (filter !== undefined) {
+						question?.map((ee, ii) => {
+							if (Number(ee) === filter[0].id) {
+								if (select[ii] !== answer[ii]) {
+									grade = grade - 1;
+								} else {
+									grade = grade + 1;
 								}
-							});
-						}
+							}
+						});
+						//}
 
 						console.log("yy");
 
