@@ -54,11 +54,10 @@ const Home: NextPage = () => {
 				router.replace("result");
 			} else {
 				if (dataMequestion?.mequestion) {
-					console.log("???", dataMequestion?.mequestion, dataMequestion);
 					let calData = dataMequestion?.mequestion?.question?.split(",");
 					let selectData =
 						dataMequestion?.mequestion?.selectQuestion?.split(",");
-					console.log("!!!!", dataMequestion?.mequestion, dataMequestion);
+
 					settotalQuestion(calData);
 					setaloneQuestion(Number(calData[0]));
 					setselectQuestion(selectData);
@@ -125,23 +124,7 @@ const Home: NextPage = () => {
 		if (selectQuestion.includes("0")) {
 			setwarningModal(true);
 		}
-	}; /*
-	useEffect(() => {
-		if (user?.student !== "student") {
-			router.replace("enter");
-		}
-	}, [user]);
-
-	/*
-{dataMequestion?.mequestion?.show === false ? (
-					<ShowInitMessage handler={showonClick} name={user?.name + ""} />
-				) : (
-					""
-				)}
-
-	*/
-	//console.log("dddddd");
-
+	};
 	return (
 		<>
 			{user ? (
