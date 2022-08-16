@@ -14,6 +14,7 @@ const WarningModal = ({ handler }: WarningModalType) => {
 	const qnasubmitonClick = (e: any) => {
 		setState(true);
 		e.preventDefault();
+		console.log("click");
 		solveFn({ qnasubmit: true });
 	};
 	useEffect(() => {
