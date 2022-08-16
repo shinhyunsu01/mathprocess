@@ -112,21 +112,23 @@ async function handler(
 						let my = data.split("_");
 						let kind = my[0];
 						let grade = Number(my[1]);
-						console.log("ii");
+						console.log("ii", kind);
 						const filter: any = allquestion.filter(
 							(data: any) => data.kind === kind
 						);
 						console.log("uu", filter[0], question);
-
-						question?.map((ee, ii) => {
-							if (Number(ee) === filter[0].id) {
-								if (select[ii] !== answer[ii]) {
-									grade = grade - 1;
-								} else {
-									grade = grade + 1;
+						if (filter !== undefined) {
+							question?.map((ee, ii) => {
+								if (Number(ee) === filter[0].id) {
+									if (select[ii] !== answer[ii]) {
+										grade = grade - 1;
+									} else {
+										grade = grade + 1;
+									}
 								}
-							}
-						});
+							});
+						}
+
 						console.log("yy");
 
 						return kind + "_" + grade + ",";
