@@ -113,10 +113,10 @@ async function handler(
 						let kind = my[0];
 						let grade = Number(my[1]);
 						console.log("ii");
-						const filter: any = allquestion?.filter(
+						const filter: any = allquestion.filter(
 							(data: any) => data.kind === kind
 						);
-						console.log("uu");
+						console.log("uu", filter[0], question);
 
 						question?.map((ee, ii) => {
 							if (Number(ee) === filter[0].id) {
