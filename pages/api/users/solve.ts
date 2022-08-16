@@ -101,8 +101,6 @@ async function handler(
 						return res;
 					})
 				);
-				console.log("second", allquestion);
-
 				score?.map((data, i) => {
 					let my = data.split("_");
 					let kind = my[0];
@@ -124,34 +122,30 @@ async function handler(
 					allscore += kind + "_" + grade + ",";
 				});
 				allscore = allscore.slice(0, -1);
-				console.log("before thired");
-				if (allscore) {
-					await client.user.update({
-						where: {
-							id: Number(finduser.id),
-						},
-						data: {
-							score: allscore,
-							qnasubmit: false,
-						},
-					});
-					//score: allscore.toString(),
-					console.log("affter thired");
-					mequestion = await client.questions.update({
-						where: {
-							id: questionfind?.id,
-						},
-						data: {
-							qnasubmit,
-						},
-					});
-					console.log("affter fourth");
 
-					res.json({
-						ok: true,
-						mequestion,
-					});
-				}
+				await client.user.update({
+					where: {
+						id: Number(user?.id),
+					},
+					data: {
+						score: allscore,
+						qnasubmit: false,
+					},
+				});
+
+				mequestion = await client.questions.update({
+					where: {
+						id: questionfind?.id,
+					},
+					data: {
+						qnasubmit,
+					},
+				});
+
+				res.json({
+					ok: true,
+					mequestion,
+				});
 			}
 		}
 	}
