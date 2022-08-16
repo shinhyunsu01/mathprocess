@@ -83,6 +83,7 @@ async function handler(
 				questionfind.question &&
 				finduser
 			) {
+				console.log("first");
 				let score = finduser.score?.split(",");
 				let answer = questionfind.answer?.split(",");
 				let select = questionfind.selectQuestion.split(",");
@@ -103,6 +104,7 @@ async function handler(
 						return res;
 					})
 				);
+				console.log("second");
 				score?.map((data, i) => {
 					let my = data.split("_");
 					let kind = my[0];
