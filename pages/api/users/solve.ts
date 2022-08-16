@@ -122,7 +122,7 @@ async function handler(
 					allscore += kind + "_" + grade + ",";
 				});
 				allscore = allscore.slice(0, -1);
-
+				console.log("check", allscore);
 				await client.user.update({
 					where: {
 						id: Number(user?.id),
@@ -132,13 +132,13 @@ async function handler(
 						qnasubmit: false,
 					},
 				});
-
+				console.log("qnasubmit", qnasubmit);
 				mequestion = await client.questions.update({
 					where: {
 						id: questionfind?.id,
 					},
 					data: {
-						qnasubmit,
+						qnasubmit: true,
 					},
 				});
 
