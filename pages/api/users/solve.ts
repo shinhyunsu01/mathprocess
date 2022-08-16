@@ -106,14 +106,17 @@ async function handler(
 				);
 				console.log("second");
 				if (score) {
+					console.log("pp");
 					const allscore = score?.map((data, i) => {
+						console.log("oo");
 						let my = data.split("_");
 						let kind = my[0];
 						let grade = Number(my[1]);
-
+						console.log("ii");
 						const filter: any = allquestion.filter(
 							(data: any) => data.kind === kind
 						);
+						console.log("uu");
 
 						question.map((ee, ii) => {
 							if (Number(ee) === filter[0].id) {
@@ -124,6 +127,7 @@ async function handler(
 								}
 							}
 						});
+						console.log("yy");
 
 						return kind + "_" + grade + ",";
 						//allscore += kind + "_" + grade + ",";
