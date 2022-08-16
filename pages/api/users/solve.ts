@@ -146,12 +146,11 @@ async function handler(
 						qnasubmit: true,
 					},
 				});
-
-				res.json({
-					ok: true,
-					mequestion,
-				});
 			}
+			res.json({
+				ok: true,
+				mequestion,
+			});
 		}
 	}
 }
