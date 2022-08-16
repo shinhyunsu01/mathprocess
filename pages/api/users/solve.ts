@@ -101,6 +101,7 @@ async function handler(
 						return res;
 					})
 				);
+				console.log("second", allquestion);
 
 				score?.map(async (data, i) => {
 					let my = data.split("_");
