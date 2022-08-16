@@ -124,19 +124,19 @@ async function handler(
 					allscore += kind + "_" + grade + ",";
 				});
 				allscore = allscore.slice(0, -1);
-				console.log("beefore thired", finduser.id);
-
-				const update = Promise.all([
+				console.log("before thired");
+				if (allscore) {
 					await client.user.update({
 						where: {
 							id: Number(finduser.id),
 						},
 						data: {
-							score: allscore.toString(),
+							score: allscore,
 							qnasubmit: false,
 						},
-					}),
-				]);
+					});
+				}
+
 				//score: allscore.toString(),
 				console.log("affter thired");
 				mequestion = await client.questions.update({
