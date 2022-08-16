@@ -20,7 +20,7 @@ interface MakeType {
 }
 
 const UserId = () => {
-	//const { user, isLoading } = useUser();
+	const { user, isLoading } = useUser();
 	let router = useRouter();
 	const { data } = useSWR<MakeType>(
 		router.query.id ? `/api/question/make/${router.query.id}` : null

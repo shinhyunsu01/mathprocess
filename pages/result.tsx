@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
+import useUser from "../libs/client/useUser";
 import { cls } from "../libs/client/utils";
 import AloneQuestion from "./[id]";
 
 const Result = () => {
+	const { user, isLoading } = useUser();
 	const { data } = useSWR("/api/question/resultquestion");
 	const [answer, setAnswer] = useState([""]);
 	const [selectQuestion, setselectQuestion] = useState([""]);
