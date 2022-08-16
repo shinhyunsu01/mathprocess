@@ -113,7 +113,7 @@ async function handler(
 					const filter: any = allquestion.filter(
 						(data: any) => data.kind === kind
 					);
-
+					console.log("question", question);
 					question.map((ee, ii) => {
 						if (Number(ee) === filter[0].id) {
 							if (select[ii] !== answer[ii]) {
