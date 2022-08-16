@@ -67,6 +67,7 @@ async function handler(
 				ok: true,
 			});
 		}
+		console.log("req", req.body);
 		if (qnasubmit) {
 			let allscore = "";
 			const finduser = await client.user.findUnique({
