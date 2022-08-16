@@ -125,7 +125,7 @@ async function handler(
 				});
 				allscore = allscore.slice(0, -1);
 			}
-
+			console.log("thired before, allscore");
 			await client.user.update({
 				where: {
 					id: Number(user?.id),
