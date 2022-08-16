@@ -124,7 +124,34 @@ async function handler(
 						});
 						allscore += kind + "_" + grade + ",";
 					}),
-				]);
+				]).then(async ()=>{
+					allscore = allscore.slice(0, -1);
+					await client.user.update({
+						where: {
+							id: Number(finduser.id),
+						},
+						data: {
+							score: allscore,
+							qnasubmit: false,
+						},
+					});
+					//score: allscore.toString(),
+					console.log("affter thired");
+					mequestion = await client.questions.update({
+						where: {
+							id: questionfind?.id,
+						},
+						data: {
+							qnasubmit,
+						},
+					});
+					console.log("affter fourth");
+
+					res.json({
+						ok: true,
+						mequestion,
+					});
+				});/*
 				allscore = allscore.slice(0, -1);
 				console.log("before thired");
 				if (allscore) {
@@ -152,7 +179,7 @@ async function handler(
 					res.json({
 						ok: true,
 						mequestion,
-					});
+					});*/
 				}
 			}
 		}
