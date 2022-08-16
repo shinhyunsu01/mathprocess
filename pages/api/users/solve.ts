@@ -126,7 +126,7 @@ async function handler(
 				allscore = allscore.slice(0, -1);
 				console.log("beefore thired", finduser.id);
 
-				await client.user.update({
+				const update = await client.user.update({
 					where: {
 						id: Number(finduser.id),
 					},
@@ -136,22 +136,22 @@ async function handler(
 				});
 				//score: allscore.toString(),
 
-				console.log("affter thired");
-				/*
-				mequestion = await client.questions.update({
-					where: {
-						id: questionfind?.id,
-					},
-					data: {
-						qnasubmit,
-					},
-				});
-				console.log("affter fourth");
-*/
-				res.json({
-					ok: true,
-					mequestion,
-				});
+				if (update) {
+					mequestion = await client.questions.update({
+						where: {
+							id: questionfind?.id,
+						},
+						data: {
+							qnasubmit,
+						},
+					});
+					console.log("affter fourth");
+
+					res.json({
+						ok: true,
+						mequestion,
+					});
+				}
 			}
 		}
 	}
