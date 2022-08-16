@@ -124,6 +124,7 @@ async function handler(
 				allscore = allscore.slice(0, -1);
 			}
 			if (allscore !== "") {
+				console.log("score", allscore);
 				await client.user.update({
 					where: {
 						id: Number(user?.id),
