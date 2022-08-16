@@ -109,11 +109,11 @@ async function handler(
 					let my = data.split("_");
 					let kind = my[0];
 					let grade = Number(my[1]);
-					console.log("filter", allquestion);
+
 					const filter: any = allquestion.filter(
 						(data: any) => data.kind === kind
 					);
-					console.log("question", question);
+
 					question.map((ee, ii) => {
 						if (Number(ee) === filter[0].id) {
 							if (select[ii] !== answer[ii]) {
@@ -124,6 +124,7 @@ async function handler(
 						}
 					});
 					allscore += kind + "_" + grade + ",";
+					console.log("allscore", allscore);
 				});
 				allscore = allscore.slice(0, -1);
 
