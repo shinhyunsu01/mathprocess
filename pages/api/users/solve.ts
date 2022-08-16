@@ -114,7 +114,7 @@ async function handler(
 						let grade = Number(my[1]);
 						console.log("ii", kind, allquestion);
 						const filter: any = allquestion.filter(
-							(data: any) => data.kind === kind
+							(data: any) => String(data.kind) === String(kind)
 						);
 						console.log("uu", filter, question);
 						//if (filter !== undefined) {
