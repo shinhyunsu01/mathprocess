@@ -49,7 +49,6 @@ const Home: NextPage = () => {
 
 	useEffect(() => {
 		if (dataMequestion?.ok) {
-			console.log("oroiginn", dataMequestion);
 			if (dataMequestion.mequestion === null) {
 				router.replace("result");
 			} else {

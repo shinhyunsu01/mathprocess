@@ -18,10 +18,9 @@ const WarningModal = ({ handler }: WarningModalType) => {
 		solveFn({ qnasubmit: true });
 	};
 	useEffect(() => {
-		/*	if (data) {
+		if (data?.ok) {
 			router.push("/result");
-		}*/
-		console.log(data);
+		}
 	}, [data]);
 	return (
 		<div className=" fixed bg-opacity-70 bg-white z-20 top-0 w-full h-full flex items-center justify-center">
