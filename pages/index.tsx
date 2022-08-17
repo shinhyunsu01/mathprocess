@@ -122,6 +122,8 @@ const Home: NextPage = () => {
 
 		if (selectQuestion.includes("0")) {
 			setwarningModal(true);
+		} else {
+			setwarningModal(true);
 		}
 	};
 	return (
