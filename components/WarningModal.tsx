@@ -8,6 +8,7 @@ interface WarningModalType {
 }
 
 const WarningModal = ({ handler }: WarningModalType) => {
+	console.log("wraning");
 	const [solveFn, { data }] = useMutation("/api/users/solve");
 	const router = useRouter();
 	const [state, setState] = useState(false);
